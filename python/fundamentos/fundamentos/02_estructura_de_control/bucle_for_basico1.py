@@ -7,11 +7,18 @@ usando ejemplos inspirados en videojuegos y situaciones atractivas.
 # Imprime todos los niveles del 0 al 100 (incluyendo el 100).
 # (Tu código aquí)
 
+niveles = 0
+while niveles <= 99:
+    niveles += 1
+    print(niveles)
+
 
 # 2. Potenciadores de energía (Múltiplos de 2)
 # Imprime los números múltiplos de 2 desde 2 hasta 500 (incluyendo el 500).
 # (Tu código aquí)
 
+for i in range (2 , 499 , 2):
+    print(i)
 
 # 3. Trampa de emojis
 # Recorre los puntos del 1 al 100.
@@ -20,11 +27,22 @@ usando ejemplos inspirados en videojuegos y situaciones atractivas.
 # ¡Cuidado con la prioridad en tus condicionales!
 # (Tu código aquí)
 
+for i in range(1 , 100):
+    if i % 10 == 0 and i % 5 == 0:
+        print(f"{i} el número es divisible 😎")
+    elif i % 5 == 0:
+        print(f"{i} el nümero es divisible 😍")
 
 # 4. Suma colosal
 # Suma todos los números pares del 0 al 500,000 e imprime la suma total.
 # (Tu código aquí)
 
+sumacolosal = 0
+for numero in range (1 , 5000001):
+    if numero % 2 == 0:
+        sumacolosal += numero 
+
+print(f"La suma total es de 500,000 ")
 
 # 5. Retroceso temporal
 # Desde 2024, retrocede de 3 en 3 hasta 0 o menos.
