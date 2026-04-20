@@ -42,18 +42,27 @@ for numero in range (1 , 5000001):
     if numero % 2 == 0:
         sumacolosal += numero 
 
-print(f"La suma total es de 500,000 ")
+print(f"La suma total es de 500,000 {sumacolosal}")
 
 # 5. Retroceso temporal
 # Desde 2024, retrocede de 3 en 3 hasta 0 o menos.
 # Imprime cada valor en la cuenta regresiva.
 # (Tu código aquí)
 
+for clima in range (2024 , -1 , -3):
+    print(clima)
 
 # 6. Contador dinámico
 # Declara las variables inicio, fin, y salto (por ejemplo: inicio=3, fin=10, salto=2).
 # Imprime los números en el rango que sean múltiplos de 'salto'.
 # (Tu código aquí)
+inicio = 3
+fin = 10
+salto = 2
+for contador in range (inicio, fin + 1):
+    if contador % 2 == 0:
+        print(contador)
+
 
 # Ejemplo: si inicio = 3, fin = 10, y salto = 2
 # Se imprimiría: 4, 6, 8, 10
