@@ -8,6 +8,7 @@ def total_logros_desbloqueados():
 
 print(total_logros_desbloqueados())
 
+#salida: 7
 
 # 2. Función que indica la cantidad de mensajes enviados en un grupo de chat de tu juego online.
 def mensajes_en_chat():
@@ -18,7 +19,7 @@ def mensajes_en_chat():
 # 3. Intentamos sumar el resultado de una función que no existe al de 'mensajes_en_chat'.
 print(cantidad_de_dias_en_el_anio() + mensajes_en_chat())
     
-#No imprime nadapor que la funcion no esta definida 
+
 
 # Función que podría retornar la temporada en que alcanzaste un rango especial en un MOBA (por ejemplo, 2022 o 2021).
 def temporada_rango_especial():
@@ -27,6 +28,7 @@ def temporada_rango_especial():
 
 print(temporada_rango_especial())
 
+#No imprime nada por que la funcion no esta definida 
 
 # 4. Cantidad de listas de reproducción que sigues en una plataforma de música.
 # Observa que la función 'retorna' 12, pero hay un print(15) después. ¿Se ejecuta?
@@ -127,6 +129,11 @@ def suma_propinas(a, b):
 
 print(suma_propinas(3, 4))
 
+#variables|valores
+#a        |3
+#b        |4
+#salida:7
+#el 2do return no seejecuta or que el de arriba rompe la funcion devolviendo un valor 
 
 # 11. Variable global que cuenta cuántas horas de juego llevas en total.
 # Dentro de la función se define otra variable con el mismo nombre.
@@ -141,6 +148,10 @@ print(horas_de_juego)
 mostrar_horas_local()
 print(horas_de_juego)
 
+#variables|valores
+#horas_de_juego|150-350
+#salida:150,150, 350,350
+#
 
 # 12. Similar al anterior, pero la función retorna el valor local 'horas_de_juego'.
 horas_de_juego = 150
@@ -154,6 +165,11 @@ def mostrar_horas_local():
 print(horas_de_juego)
 mostrar_horas_local()
 print(horas_de_juego)
+
+#variables|valores
+#horas_de_juego|150-350
+#salida: 150, 150. 350, 350 ,350
+#
 
 
 # 13. Ahora reasignamos la variable global con el valor que retorna la función.
@@ -169,6 +185,10 @@ print(horas_de_juego)
 horas_de_juego = mostrar_horas_local()
 print(horas_de_juego)
 
+#variables|valores
+#
+#salidas: seguidores: 300, likes:120, finalizando conteo
+#
 
 # 14. Una función que primero muestra la cantidad de seguidores en tu canal, luego llama a otra función para mostrar "Likes".
 def mostrar_seguidores():
@@ -181,6 +201,10 @@ def mostrar_likes():
 
 mostrar_seguidores()
 
+#variables| valores 
+#
+#salidas: seguidores: 300, likes:120, finalizando conteo   
+#
 
 # 15. Función que muestra "Reproducciones" de un tema musical y recibe un valor de otra función,
 # luego retorna un número que podría ser un "ID" final de procesamiento.
@@ -196,3 +220,10 @@ def calcular_incremento():
 
 b = mostrar_reproducciones()
 print(b)
+
+
+#variables|valores
+#a        |# 1
+#b        |# 2
+#salidas: Reproducciones: 5000, incremento calculado: ,1 ,4 
+#
