@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="elizabethcornejo@liceovvh.cl">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>Mensajes</title>
+</head>
+<body>
+    
+<div class="contenedor">
+    
+        <div class="mensa">
+            <h1>Andrea</h1>
+            <h2>Mensajes de Andrea</h2>
+            <div class="unidos">
+            <input type="text" placeholder="Mensajes..." style="border-radius: 4px; width: 400px; height: 20px; margin-bottom: 10px;" >
+            <button  style="width: 100px; height: 25px;">Enviar</button>
+        </div>
+        </div>
+
+        <div class="prm-mensaje">
+            <a href="#">Mensaje de Kathya, hace 5 horas.</a>
+            <div class="texto">
+                <p>lorem ipsum dolor sit amet, consectetur adipisicing elit, set do eisumod tempor inciditum ul labore
+                    et dolore magma aliqua.
+                </p>
+            </div>
+        </div>
+        <div class="sgd-mensaje">
+                <h2>Comentarios</h2>
+                <a href="#">Comentario de Patricia, hace 1 hora.</a>
+                <p>lorem ipsum dolor sit amet, consectetur adipisicing elit, set do eisumod tempor inciditum ul labore
+                    et dolore magma aliqua.</p>
+                    <div class="unidos">
+                    <input type="text" placeholder="Escribe un comentario..." style="border-radius: 4px; width: 400px; height: 20px; margin-bottom: 10px;">
+                    <button  style="width: 100px; height: 25px;">Enviar</button>
+                </div>
+        </div>
+</div>
+
+<style>
+
+body{
+    display: flex;
+    justify-content: center;
+}
+.contenedor{
+    font-family: Arial, sans-serif;
+}
+
+.mensa{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.prm-mensaje{
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+}
+
+.sgd-mensaje{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 400px;
+}
+
+.unidos{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+</style>
+
+</body>
+</html>

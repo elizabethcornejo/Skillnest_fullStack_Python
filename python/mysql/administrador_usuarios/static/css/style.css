@@ -1,0 +1,83 @@
+*{
+    padding: 0 auto;
+    margin: 0 auto;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+body{
+    font-family: Arial, sans-serif;
+    background: white;
+}
+
+/*
+PRIMERA PARTE--------------------------------------------------------------------------------------------------------------------------------------
+*/
+
+.container{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin: 50px;
+}
+
+.row{
+    display: flex;
+    justify-content: space-between;
+    gap: 350px;
+}
+
+.titulo{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+
+.Iniciar-secion{
+    display: flex;
+    flex-direction: column;
+}
+
+.registrar{
+    display: flex;
+    flex-direction: column;
+}
+
+.contra{
+    display: flex;
+    margin: 10px;
+    gap: 20px;
+}
+
+.email{
+    display: flex;
+    margin: 10px;
+    gap: 80px;
+}
+
+.nombre{
+    display: flex;
+    margin: 10px;
+    gap: 100px;
+}
+
+.email2{
+    display: flex;
+    margin: 10px;
+    gap: 120px;
+}
+
+.contra2{
+    display: flex;
+    margin: 10px;
+    gap: 60px;
+}
+
+.cofcontra{
+    display: flex;
+    margin: 10px;
+    gap: 20px;
+}
+
+
+
+

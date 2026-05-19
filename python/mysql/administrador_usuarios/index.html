@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="elizabethcornejo@liceovvh.cl">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/style.css">
+    <title>Administrador de usuarios</title>
+</head>
+<body>
+        <div class="titulo">
+            <h2>Inicio de seción</h2>
+            <h2>Registro</h2>
+        </div>
+<div class="container">
+    
+    <div class="row">
+        <div class="Iniciar-secion">
+            <div class="email">
+                <h2>Email</h2>
+                <input type="text" placeholder="Email..." style="border-radius: 4px; width: 150px; height: 20px;" >
+            </div>
+            <div class="contra">
+                <h2>Contraseña</h2>
+                <input type="text" placeholder="Contraseña..." style="border-radius: 4px; width: 150px; height: 20px;">
+            </div>
+            <div class="boton-inc">
+                <a href="admin.html">
+                    <button style="width: 100px; height: 25px;">Iniciar seción</button>
+                        </a>
+            </div>
+        </div>
+        <div class="registrar">
+            <div class="nombre">
+                <h2>Nombre</h2>
+                <input type="text" placeholder="Nombre..." style="border-radius: 4px; width: 150px; height: 20px;" >
+            </div>
+            <div class="email2">
+                <h2>Email</h2>
+                <input type="text" placeholder="Email..." style="border-radius: 4px; width: 150px; height: 20px;" >
+            </div>
+            <div class="contra2">
+                <h2>Contraseña</h2>
+                <input type="text" placeholder="Contraseña" style="border-radius: 4px; width: 150px; height: 20px;" >
+            </div>
+            <div class="cofcontra">
+                <h2>Cof.contraseña</h2>
+                <input type="text" placeholder="Confirmar" style="border-radius: 4px; width: 150px; height: 20px;" >
+            </div>
+            <div class="boton-inc">
+                <a href="admin.html">
+                    <button style="width: 100px; height: 25px;">Registrar</button>
+                        </a>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        
+.container{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin: 50px;
+}
+
+.row{
+    display: flex;
+    justify-content: space-between;
+    gap: 350px;
+}
+
+.titulo{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+
+.Iniciar-secion{
+    display: flex;
+    flex-direction: column;
+}
+
+.registrar{
+    display: flex;
+    flex-direction: column;
+}
+
+.contra{
+    display: flex;
+    margin: 10px;
+    gap: 20px;
+}
+
+.email{
+    display: flex;
+    margin: 10px;
+    gap: 80px;
+}
+
+.nombre{
+    display: flex;
+    margin: 10px;
+    gap: 100px;
+}
+
+.email2{
+    display: flex;
+    margin: 10px;
+    gap: 120px;
+}
+
+.contra2{
+    display: flex;
+    margin: 10px;
+    gap: 60px;
+}
+
+.cofcontra{
+    display: flex;
+    margin: 10px;
+    gap: 20px;
+}
+
+    </style>
+</body>
+</html>

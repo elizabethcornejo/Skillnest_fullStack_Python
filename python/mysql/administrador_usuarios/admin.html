@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="elizabethcornejo@liceovvh.cl">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>Inicio seción</title>
+</head>
+<body>
+    
+<div class="cuadrado" id="cuadrado">
+
+    <div class="boton">
+        <a href="nuevousuario.html">
+        <button>Nuevo Usuario</button>
+    </a>
+    </div>
+
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>E-mail</th>
+            <th>Tipo Usuario</th>
+            <th>Acciones</th>
+        </tr>
+
+        <tr>
+            <td>Patricia</td>
+            <td>patricia@codingdojo.com</td>
+            <td>Admin</td>
+            <td class="acciones">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <i class="fa-solid fa-trash"></i>
+                <i class="fa-regular fa-envelope"></i>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Andrea</td>
+            <td>andrea@codingdojo.com</td>
+            <td>Usuario</td>
+            <td class="acciones">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <i class="fa-solid fa-trash"></i>
+                <i class="fa-regular fa-envelope"></i>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Katya</td>
+            <td>katya@codingdojo.com</td>
+            <td>Usuario</td>
+            <td class="acciones">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <i class="fa-solid fa-trash"></i>
+                <i class="fa-regular fa-envelope"></i>
+            </td>
+        </tr>
+
+    </table>
+
+</div>
+<style>
+.cuadrado{
+    width: 700px;
+    margin: 30px auto;
+    padding: 10px;
+    margin-top: 100px;
+}
+
+.boton{
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+.boton button{
+    background: #f5f5f5;
+    border: 3px solid black;
+    padding: 8px 15px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 2px 2px 0 black;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td{
+    border: 2px solid gray;
+    padding: 10px;
+    text-align: left;
+}
+
+th{
+    background: #d9d9d9;
+}
+
+td{
+    background: #f2f2f2;
+}
+
+.acciones{
+    display: flex;
+    gap: 10px;
+    font-size: 22px;
+    justify-content: center;
+}
+</style>
+</body>
+</html>
