@@ -134,3 +134,80 @@ VALUES ("randy123", "randy123", "randy@gmmail.com", 2),
 INSERT INTO comentarios( ) VALUES ();
 INSERT INTO mensajes()VALUES;
 
+
+--------------------------------------------------------------------------------------------------------
+
+USE sistema_mensajes;
+INSERT INTO roles(nombre_rol, descripcion_rol)
+VALUES("admin", "Control total"),
+("usuario_comun", "permiso administracion basicos"),
+("invitados", "usuario temporal sin permiso limitados");
+INSERT INTO usuarios(nombre_usuario, password_hash, email, id_rol)
+VALUES ("randy123", "randy123", "randy@gmmail.com", 2),
+("akon123", "akon123", "akon@gmmail.com", 1),
+("tete", "tete", "tete@gmail.com", 2),
+("anne", "anne", "anne@gm  ail.com", 3),
+("martin", "martin", "martin@gmail.com", 3);
+SELECT * FROM roles;
+SELECT * FROM usuarios;
+INSERT INTO comentarios (contenido, created_by, id_usuario)
+VALUES("Hola este es un comentario",1 ,1 ),
+("Hola soy el Akon admin",2 ,2 ),
+("Hola soy la teté",3 ,3 );
+SELECT * FROM comentarios;
+
+INSERT INTO mensajes(contenido, created_by, emisor, receptor)
+VALUE ("Hola Martin, eres el mejor", 1, 1, 5),
+("Hola Teté, ¿Hiciste la tarea?", 4, 4, 3),
+("Hola Randy, mañana es feriado", 3, 3, 1);
+
+SELECT * FROM mensajes;
+
+-- CONSULTAS SIMPLES CON CONDICIONES 
+-- WHERE EN MYSQL
+-- MOSTRAR MENSAJES DONDE EL REMITENTE SEA RANDY 
+
+SELECT contenido, emisor 
+FROM mensajes 
+WHERE emisor = 1; -- APLICA CONDICION SOBRE CONSULTA
+
+-- MOSTRAR USUARIOS QUE ESTAN ACTIVOS ( DELETE 0 )
+SELECT nombre_usuario, email, id_rol, deleted
+FROM usuarios 
+WHERE deleted = 0;
+
+-- BORRAR UN USUARIO 
+UPDATE usuarios 
+SET deleted = 1
+WHERE id_usuario = 1;
+
+-- MOSTRAR USUARIOS QUE ESTAN ELIMINADOS ( DELETE 1 )
+SELECT nombre_usuario, email, id_rol, deleted
+FROM usuarios 
+WHERE deleted = 0;
+
+-- RECUPERAR UN USUARIO
+UPDATE usuarios 
+SET deleted = 0
+WHERE id_usuario = 2; -- RECUPERAR UN USUARIO 
+
+-- TAREA 
+-- MOSTRAR ROLES DE USUARIO (NOMBRE, DESCRIPCION)
+SELECT nombre_rol, descripcion_rol 
+FROM roles
+WHERE deleted = 0;
+
+-- ELIMINAR 2 ROLES DE USUARIO 
+UPDATE roles 
+SET deleted = 1
+WHERE id_rol IN (2, 3);
+
+-- RECUPERAR 1 ROL DE USUARIO 
+
+UPDATE roles 
+SET deleted = 0
+WHERE id_rol = 2;
+
+SELECT nombre_rol, descripcion_rol
+FROM roles 
+WHERE deleted = 0;
