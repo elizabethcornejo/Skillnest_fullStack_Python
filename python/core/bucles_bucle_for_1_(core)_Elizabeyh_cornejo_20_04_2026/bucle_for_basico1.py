@@ -3,66 +3,61 @@ En este archivo pondrás en práctica el uso de bucles 'for' en Python,
 usando ejemplos inspirados en videojuegos y situaciones atractivas.
 """
 
-# 1. Generador de niveles
-# Imprime todos los niveles del 0 al 100 (incluyendo el 100).
-# (Tu código aquí)
+# 1. Barra de experiencia
+# Mostrar los niveles del 0 al 100
 
-niveles = 0
-while niveles <= 99:
-    niveles += 1
-    print(niveles)
+nivel_actual = 0
 
-
-# 2. Potenciadores de energía (Múltiplos de 2)
-# Imprime los números múltiplos de 2 desde 2 hasta 500 (incluyendo el 500).
-# (Tu código aquí)
-
-for i in range (2 , 499 , 2):
-    print(i)
-
-# 3. Trampa de emojis
-# Recorre los puntos del 1 al 100.
-# - Si el número es divisible por 5, imprime ""
-# - Si es divisible por 10, imprime ""
-# ¡Cuidado con la prioridad en tus condicionales!
-# (Tu código aquí)
-
-for i in range(1 , 100):
-    if i % 10 == 0 and i % 5 == 0:
-        print(f"{i} el número es divisible 😎")
-    elif i % 5 == 0:
-        print(f"{i} el nümero es divisible 😍")
-
-# 4. Suma colosal
-# Suma todos los números pares del 0 al 500,000 e imprime la suma total.
-# (Tu código aquí)
-
-sumacolosal = 0
-for numero in range (1 , 5000001):
-    if numero % 2 == 0:
-        sumacolosal += numero 
-
-print(f"La suma total es de 500,000 {sumacolosal}")
-
-# 5. Retroceso temporal
-# Desde 2024, retrocede de 3 en 3 hasta 0 o menos.
-# Imprime cada valor en la cuenta regresiva.
-# (Tu código aquí)
-
-for clima in range (2024 , -1 , -3):
-    print(clima)
-
-# 6. Contador dinámico
-# Declara las variables inicio, fin, y salto (por ejemplo: inicio=3, fin=10, salto=2).
-# Imprime los números en el rango que sean múltiplos de 'salto'.
-# (Tu código aquí)
-inicio = 3
-fin = 10
-salto = 2
-for contador in range (inicio, fin + 1):
-    if contador % 2 == 0:
-        print(contador)
+while nivel_actual <= 100:
+    print(nivel_actual)
+    nivel_actual += 1
 
 
-# Ejemplo: si inicio = 3, fin = 10, y salto = 2
-# Se imprimiría: 4, 6, 8, 10
+# 2. Carga de energía
+# Mostrar los múltiplos de 2 entre 2 y 500
+
+for energia in range(2, 501, 2):
+    print(energia)
+
+
+# 3. Detector de recompensas
+# Si es múltiplo de 10 muestra 
+# Si es múltiplo de 5 muestra 
+
+for punto in range(1, 101):
+
+    if punto % 10 == 0:
+        print(f"{punto} Recompensa especial")
+
+    elif punto % 5 == 0:
+        print(f"{punto} Recompensa normal")
+
+
+# 4. Suma gigante
+# Sumar todos los números pares desde 0 hasta 500000
+
+acumulador = 0
+
+for valor in range(0, 500001, 2):
+    acumulador += valor
+
+print(f"La suma total de los números pares es: {acumulador}")
+
+
+# 5. Viaje al pasado
+# Retroceder de 3 en 3 desde 2024
+
+for anio in range(2024, -1, -3):
+    print(anio)
+
+
+# 6. Contador personalizable
+
+comienzo = 4
+limite = 20
+incremento = 4
+
+for numero in range(comienzo, limite + 1):
+
+    if numero % incremento == 0:
+        print(numero)
