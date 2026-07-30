@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Plataformas Digitales</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <div class="container py-5">
+        
+        <!-- Encabezado -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1 class="h2 fw-bold text-dark">Métricas de Plataformas</h1>
+                <p class="text-muted mb-0">Gestión y análisis de las aplicaciones más populares.</p>
+            </div>
+            <button class="btn btn-outline-secondary btn-sm" id="btnThemeToggle">
+                <i class="fa-solid fa-moon"></i> Modo
+            </button>
+        </div>
+
+        <!-- Tarjetas de Resumen (KPIs) -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-4">
+                <div class="card card-kpi border-0 shadow-sm p-3">
+                    <div class="d-flex align-items-center">
+                        <div class="icon-shape bg-primary text-white rounded-3 me-3">
+                            <i class="fa-solid fa-layer-group"></i>
+                        </div>
+                        <div>
+                            <span class="text-muted fs-7">Total Plataformas</span>
+                            <h3 class="mb-0 fw-bold">{{ plataformas|length }}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-kpi border-0 shadow-sm p-3">
+                    <div class="d-flex align-items-center">
+                        <div class="icon-shape bg-success text-white rounded-3 me-3">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <div>
+                            <span class="text-muted fs-7">Usuarios Totales</span>
+                            <h3 class="mb-0 fw-bold">{{ "{:,}".format(total_usuarios) }} M</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-kpi border-0 shadow-sm p-3">
+                    <div class="d-flex align-items-center">
+                        <div class="icon-shape bg-info text-white rounded-3 me-3">
+                            <i class="fa-solid fa-globe"></i>
+                        </div>
+                        <div>
+                            <span class="text-muted fs-7">Estado de Red</span>
+                            <h3 class="mb-0 fw-bold text-success">100% Online</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controles: Buscador e Inputs -->
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+                <div class="row g-2">
+                    <div class="col-md-8">
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0"><i class="fa-solid fa-magnifying-glass text-muted"></i></span>
+                            <input type="text" id="searchInput" class="form-control border-start-0 ps-0" placeholder="Buscar por nombre, categoría o país..." value="{{ busqueda }}">
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <span class="badge bg-light text-dark p-2 border"> Tip: Haz clic en las cabeceras para ordenar</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabla -->
+        <div class="card border-0 shadow-sm">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0" id="dataTable">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col" class="sortable" onclick="sortTable(0)"># <i class="fa-solid fa-sort ms-1"></i></th>
+                            <th scope="col" class="sortable" onclick="sortTable(1)">Nombre <i class="fa-solid fa-sort ms-1"></i></th>
+                            <th scope="col" class="sortable" onclick="sortTable(2)">Categoría <i class="fa-solid fa-sort ms-1"></i></th>
+                            <th scope="col" class="sortable text-end" onclick="sortTable(3, true)">Usuarios (M) <i class="fa-solid fa-sort ms-1"></i></th>
+                            <th scope="col" class="sortable text-center" onclick="sortTable(4, true)">Fundado <i class="fa-solid fa-sort ms-1"></i></th>
+                            <th scope="col" class="sortable" onclick="sortTable(5)">País <i class="fa-solid fa-sort ms-1"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in plataformas %}
+                        <tr>
+                            <td class="fw-bold text-muted">{{ item.id }}</td>
+                            <td>
+                                <span class="fw-semibold">{{ item.nombre }}</span>
+                            </td>
+                            <td><span class="badge bg-secondary-subtle text-secondary rounded-pill">{{ item.categoria }}</span></td>
+                            <td class="text-end fw-bold text-primary">{{ "{:,}".format(item.usuarios) }} M</td>
+                            <td class="text-center">{{ item.fundado }}</td>
+                            <td>
+                                {% if item.pais == 'EE.UU.' %}
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle">🇺🇸 {{ item.pais }}</span>
+                                {% elif item.pais == 'China' %}
+                                    <span class="badge bg-danger-subtle text-danger border border-danger-subtle">🇨🇳 {{ item.pais }}</span>
+                                {% else %}
+                                    <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle">🇸🇪 {{ item.pais }}</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr id="noResultsRow">
+                            <td colspan="6" class="text-center py-4 text-muted">
+                                <i class="fa-solid fa-folder-open fs-2 mb-2 d-block"></i>
+                                No se encontraron registros que coincidan.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JS de Bootstrap y Scripts Personalizados -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
