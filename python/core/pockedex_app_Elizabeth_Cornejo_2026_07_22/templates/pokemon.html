@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex - {{ titulo }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Pokédex Flask</h1>
+        <nav>
+            <a href="/pokemon">Ver todos</a> | 
+            <a href="/pokemon/cantidad/3">Top 3</a> | 
+            <a href="/pokemon/pikachu">Pikachu</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2>{{ titulo }}</h2>
+
+        <div class="pokedex-grid">
+            {% for pokemon in pokemon_list %}
+                <div class="card">
+                    <span class="pokemon-id">#{{ "%03d" | format(pokemon.id) }}</span>
+                    <img src="{{ url_for('static', filename='images/) }}" alt="{{ pokemon.nombre }}">
+                    <h3>{{ pokemon.nombre }}</h3>
+                    <p class="tipo"><strong>Tipo:</strong> {{ pokemon.tipo }}</p>
+                    
+                    <div class="stats">
+                        <p><strong>Poder:</strong> {{ pokemon.poder }}</p>
+                        <p><strong>Altura:</strong> {{ pokemon.altura }}</p>
+                        <p><strong>Peso:</strong> {{ pokemon.peso }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>
