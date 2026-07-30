@@ -1,66 +1,79 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, abort
 
 app = Flask(__name__)
 
-# Base de datos ficticia de Pokémon
-pokedex = [
-    {"id": 1, "nombre": "Bulbasaur", "tipo": "Planta/Veneno", "imagen": "bulbasaur.png", "poder": 45, "altura": "0.7m", "peso": "6.9kg"},
-    {"id": 4, "nombre": "Charmander", "tipo": "Fuego", "imagen": "charmander.png", "poder": 39, "altura": "0.6m", "peso": "8.5kg"},
-    {"id": 7, "nombre": "Squirtle", "tipo": "Agua", "imagen": "squirtle.png", "poder": 44, "altura": "0.5m", "peso": "9.0kg"},
-    {"id": 25, "nombre": "Pikachu", "tipo": "Eléctrico", "imagen": "pikachu.png", "poder": 35, "altura": "0.4m", "peso": "6.0kg"},
-    {"id": 39, "nombre": "Jigglypuff", "tipo": "Normal/Hada", "imagen": "jigglypuff.png", "poder": 115, "altura": "0.5m", "peso": "5.5kg"},
-    {"id": 52, "nombre": "Meowth", "tipo": "Normal", "imagen": "meowth.png", "poder": 40, "altura": "0.4m", "peso": "4.2kg"},
-    {"id": 54, "nombre": "Psyduck", "tipo": "Agua", "imagen": "psyduck.png", "poder": 50, "altura": "0.8m", "peso": "19.6kg"},
-    {"id": 94, "nombre": "Gengar", "tipo": "Fantasma/Veneno", "imagen": "gengar.png", "poder": 60, "altura": "1.5m", "peso": "40.5kg"},
-    {"id": 95, "nombre": "Onix", "tipo": "Roca/Tierra", "imagen": "onix.png", "poder": 35, "altura": "8.8m", "peso": "210.0kg"},
-    {"id": 143, "nombre": "Snorlax", "tipo": "Normal", "imagen": "snorlax.png", "poder": 160, "altura": "2.1m", "peso": "460.0kg"}
+# Base de datos local de Pokémon con información detallada
+POKEMON_DATABASE = [
+    {
+        "id": 1,
+        "name": "Bulbasaur",
+        "type": "Planta / Veneno",
+        "image": "bulbasaur.png",
+        "description": "Este Pokémon nace con una semilla en el lomo que crece gradualmente con el tiempo.",
+        "height": "0.7 m",
+        "weight": "6.9 kg",
+        "stats": {"hp": 45, "attack": 49, "defense": 49, "speed": 45}
+    },
+    {
+        "id": 4,
+        "name": "Charmander",
+        "type": "Fuego",
+        "image": "charmander.png",
+        "description": "La llama de su cola indica la fuerza vital que posee. Si está sano, la llama arderá con fuerza.",
+        "height": "0.6 m",
+        "weight": "8.5 kg",
+        "stats": {"hp": 39, "attack": 52, "defense": 43, "speed": 65}
+    },
+    {
+        "id": 39,
+        "name": "Jigglypuff",
+        "type": "Normal / Hada",
+        "image": "jigglypuff.png",
+        "description": "Si entona su dulce canción, sus oyentes caerán rendidos en un profundo sueño de inmediato.",
+        "height": "0.5 m",
+        "weight": "5.5 kg",
+        "stats": {"hp": 115, "attack": 45, "defense": 20, "speed": 20}
+    },
+    {
+        "id": 94,
+        "name": "Gengar",
+        "type": "Fantasma / Veneno",
+        "image": "gengar.png",
+        "description": "Para quitarle la vida a su presa, se oculta en su sombra y espera pacientemente el momento perfecto.",
+        "height": "1.5 m",
+        "weight": "40.5 kg",
+        "stats": {"hp": 60, "attack": 65, "defense": 60, "speed": 110}
+    }
 ]
 
-
-# Error cuando no se encuentra un Pokémon
-def pokemon_no_encontrado(mensaje: str):
-    """Función simple para renderizar la página 404 con un mensaje."""
-    return render_template("404.html", mensaje=mensaje), 404
-
-
-# Ruta para mostrar todos los Pokémon
-@app.route("/pokemon")
-def mostrar_todos():
-    return render_template("pokemon.html", pokemon_list=pokedex, titulo="Todos los Pokémon")
-
-
-# Ruta para mostrar un Pokémon por número en la Pokédex
-@app.route("/pokemon/<int:id>")
-def mostrar_por_id(id):
-    # Buscamos el Pokémon que coincida con el ID numérico
-    resultado = next((p for p in pokedex if p["id"] == id), None)
+def buscar_pokemon_por_filtro(criterio=""):
+    """Función auxiliar para filtrar la lista de criaturas."""
+    criterio = criterio.strip().lower()
+    if not criterio:
+        return POKEMON_DATABASE
     
-    if resultado is None:
-        return pokemon_no_encontrado(f'No pudimos encontrar información sobre el Pokémon con ID #{id} en nuestra Pokédex.')
-    
-    # Pasamos una lista con un solo elemento para reutilizar el mismo template
-    return render_template("pokemon.html", pokemon_list=[resultado], titulo=f"Detalle de {resultado['nombre']}")
+    resultados = []
+    for monster in POKEMON_DATABASE:
+        if criterio in monster["name"].lower() or criterio in str(monster["id"]):
+            resultados.append(monster)
+    return resultados
 
+@app.route('/')
+def mostrar_catalogo():
+    busqueda_usr = request.args.get('q', '')
+    lista_filtrada = buscar_pokemon_por_filtro(busqueda_usr)
+    return render_template('index.html', pokemons=lista_filtrada, query=busqueda_usr)
 
-# Ruta para mostrar un Pokémon por nombre
-@app.route("/pokemon/<string:nombre>")
-def mostrar_por_nombre(nombre):
-    # Buscamos ignorando mayúsculas/minúsculas
-    resultado = next((p for p in pokedex if p["nombre"].lower() == nombre.lower()), None)
-    
-    if resultado is None:
-        return pokemon_no_encontrado(f'No pudimos encontrar información sobre "{nombre}" en nuestra Pokédex.')
-    
-    return render_template("pokemon.html", pokemon_list=[resultado], titulo=f"Detalle de {resultado['nombre']}")
+@app.route('/pokemon/<int:poke_id>')
+def ver_detalle_pokemon(poke_id):
+    coincidencia = next((p for p in POKEMON_DATABASE if p["id"] == poke_id), None)
+    if not coincidencia:
+        abort(404)
+    return render_template('detail.html', pokemon=coincidencia)
 
+@app.errorhandler(404)
+def recurso_no_encontrado(error):
+    return render_template('404.html'), 404
 
-# Ruta para mostrar una cantidad específica de Pokémon
-@app.route("/pokemon/cantidad/<int:cant>")
-def mostrar_cantidad(cant):
-    # Tomamos los primeros 'cant' Pokémon de la lista
-    seleccionados = pokedex[:cant]
-    return render_template("pokemon.html", pokemon_list=seleccionados, titulo=f"Primeros {len(seleccionados)} Pokémon")
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True, port=5000)
