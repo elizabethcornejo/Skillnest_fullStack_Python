@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Pedido Confirmado - Mercado de Frutas</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        🍎 Mercado de Frutas
+    </div>
+
+    <nav>
+        <a href="/">Inicio</a>
+        <a href="/frutas">Catálogo</a>
+    </nav>
+
+</header>
+
+
+<main class="confirmacion">
+
+    <!-- Encabezado de confirmación -->
+
+    <section class="mensaje-confirmacion">
+
+        <div class="check">
+            ✓
+        </div>
+
+        <h1>¡Pedido Confirmado!</h1>
+
+        <p>Gracias por tu compra</p>
+
+    </section>
+
+
+    <!-- Información del cliente -->
+
+    <section class="contenido-pedido">
+
+        <h2>Información del Cliente</h2>
+
+        <div class="cliente-grid">
+
+            <div>
+                <p>
+                    <strong>Nombre:</strong>
+                    {{ nombre }}
+                </p>
+
+                <p>
+                    <strong>Email:</strong>
+                    {{ email }}
+                </p>
+            </div>
+
+            <div>
+                <p>
+                    <strong>Dirección de entrega:</strong>
+                    {{ direccion }}
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- Detalle del pedido -->
+
+        <h2>Detalle del Pedido</h2>
+
+
+        <!-- Total de frutas -->
+
+        <div class="total-frutas">
+
+            Total de frutas en tu pedido:
+            <strong>{{ total_frutas }}</strong>
+
+        </div>
+
+
+        <!-- Tabla -->
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Fruta</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for item in orden %}
+
+                <tr>
+
+                    <td>
+                        <span class="emoji-fruta">
+                            {% if item.nombre == "Manzana" %}
+                                🍎
+                            {% elif item.nombre == "Plátano" %}
+                                🍌
+                            {% elif item.nombre == "Naranja" %}
+                                🍊
+                            {% elif item.nombre == "Fresa" %}
+                                🍓
+                            {% elif item.nombre == "Uva" %}
+                                🍇
+                            {% elif item.nombre == "Piña" %}
+                                🍍
+                            {% elif item.nombre == "Sandía" %}
+                                🍉
+                            {% elif item.nombre == "Mango" %}
+                                🥭
+                            {% endif %}
+                        </span>
+
+                        {{ item.nombre }}
+
+                    </td>
+
+                    <td>
+                        ${{ "%.1f"|format(item.precio) }}
+                    </td>
+
+                    <td>
+                        {{ item.cantidad }}
+                    </td>
+
+                    <td>
+                        ${{ "%.1f"|format(item.subtotal) }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+
+            <tfoot>
+
+                <tr>
+
+                    <td colspan="3">
+                        <strong>Total:</strong>
+                    </td>
+
+                    <td>
+                        <strong>
+                            ${{ "%.1f"|format(total_pagar) }}
+                        </strong>
+                    </td>
+
+                </tr>
+
+            </tfoot>
+
+        </table>
+
+
+        <!-- Información de entrega -->
+
+        <div class="entrega">
+
+            <div class="camion">
+                🚚
+            </div>
+
+            <div>
+
+                <strong>
+                    Información de entrega
+                </strong>
+
+                <p>
+                    Tu pedido será entregado en un plazo de
+                    24-48 horas.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Botón -->
+
+        <div class="volver-container">
+
+            <a href="/" class="volver">
+                🏠 Volver a la tienda
+            </a>
+
+        </div>
+
+    </section>
+
+</main>
+
+</body>
+</html>

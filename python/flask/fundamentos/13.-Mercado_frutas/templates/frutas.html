@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Nuestras Frutas</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        🍎 Mercado de Frutas
+    </div>
+
+    <nav>
+        <a href="/">Inicio</a>
+        <a href="/frutas">Catálogo</a>
+    </nav>
+
+</header>
+
+
+<section class="hero">
+
+    <h1>Nuestras Frutas</h1>
+
+    <p>
+        Descubre nuestra variedad de frutas frescas disponibles
+    </p>
+
+</section>
+
+
+<main class="catalogo">
+
+    <div class="catalogo-grid">
+
+        {% for fruta in frutas %}
+
+        <div class="fruta-catalogo">
+
+            <img
+                src="{{ url_for('static',
+                filename='img/' + fruta.imagen) }}"
+                alt="{{ fruta.nombre }}">
+
+            <div>
+
+                <h3>{{ fruta.nombre }}</h3>
+
+                <strong>
+                    ${{ "%.1f"|format(fruta.precio) }}
+                </strong>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    <a href="/" class="boton">
+        🛒 Hacer un pedido
+    </a>
+
+
+    <h2 class="porque">
+        ¿Por qué elegirnos?
+    </h2>
+
+
+    <div

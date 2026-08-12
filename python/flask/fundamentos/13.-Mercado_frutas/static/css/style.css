@@ -1,0 +1,454 @@
+/* ==========================================
+   RESET & ESTILOS BASE
+   ========================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f6f8;
+    color: #333333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ==========================================
+   HEADER / NAVEGACIÓN
+   ========================================== */
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+header nav a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 0.95rem;
+}
+
+header nav a:hover {
+    color: #ffffff;
+}
+
+/* ==========================================
+   HERO / BANNER GRIS
+   ========================================== */
+.hero {
+    background-color: #7d7d7d;
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.hero h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* ==========================================
+   1. CATÁLOGO DE FRUTAS (frutas2.png)
+   ========================================== */
+.catalogo {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.catalogo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.fruta-catalogo {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    aspect-ratio: 1;
+}
+
+.fruta-catalogo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Degradado oscuro sobre la imagen para resaltar el texto */
+.fruta-catalogo div {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 15px 12px 10px 12px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.75));
+    color: white;
+    text-align: left;
+}
+
+.fruta-catalogo h3 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.fruta-catalogo strong {
+    color: #ff9800;
+    font-size: 0.9rem;
+}
+
+/* Botón "Hacer un pedido" */
+.boton {
+    display: inline-block;
+    background-color: #1e88e5;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+}
+
+.boton:hover {
+    background-color: #1565c0;
+}
+
+/* Secciones Informativas (¿Por qué elegirnos?) */
+h2.porque {
+    margin-top: 50px;
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+/* Contenedor de las 3 tarjetas informativas si agregas esa estructura en HTML */
+.caracteristicas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.caracteristica-card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+/* ==========================================
+   2. TIENDA Y FORMULARIO (frutas.png)
+   ========================================== */
+.contenedor {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* Formulario layout dividido */
+.productos form {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 25px;
+    align-items: start;
+}
+
+/* Grid del lado izquierdo con tarjetas */
+.grid-frutas {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.grid-frutas h2 {
+    grid-column: 1 / -1;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.tarjeta {
+    border: 1px solid #f0f0f0;
+    background-color: #fafafa;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.imagen-fruta {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.imagen-fruta img {
+    height: 100px;
+    object-fit: contain;
+}
+
+.info-fruta h3 {
+    font-size: 1rem;
+    margin-bottom: 2px;
+}
+
+.info-fruta strong {
+    color: #2e7d32;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.info-fruta p {
+    font-size: 0.75rem;
+    color: #666;
+    margin-bottom: 12px;
+}
+
+/* Input y botones de cantidad +/- */
+.cantidad {
+    display: flex;
+    align-items: center;
+    background: #f0f0f0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.cantidad button {
+    background: #e0e0e0;
+    border: none;
+    width: 30px;
+    height: 30px;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.cantidad button:hover {
+    background: #d6d6d6;
+}
+
+.cantidad input {
+    width: 100%;
+    text-align: center;
+    border: none;
+    background: transparent;
+    font-weight: bold;
+}
+
+/* Sidebar derecha (Información de Contacto) */
+.datos {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.datos h2 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.datos label {
+    display: block;
+    font-size: 0.85rem;
+    margin-top: 10px;
+    margin-bottom: 4px;
+    color: #555;
+}
+
+.datos input, .datos textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fafafa;
+}
+
+.datos textarea {
+    height: 80px;
+    resize: none;
+}
+
+.datos .boton {
+    width: 100%;
+    margin-top: 15px;
+}
+
+/* ==========================================
+   3. CONFIRMACIÓN DE PEDIDO (frutas3.png)
+   ========================================== */
+.confirmacion {
+    max-width: 750px;
+    margin: 40px auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
+/* Banner superior verde de confirmación */
+.mensaje-confirmacion {
+    background-color: #1e8549;
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.mensaje-confirmacion .check {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: white;
+    color: #1e8549;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.mensaje-confirmacion h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.mensaje-confirmacion p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* Contenido interno */
+.contenido-pedido {
+    padding: 30px;
+}
+
+.contenido-pedido h2 {
+    color: #2e7d32;
+    font-size: 1.1rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    margin-top: 20px;
+}
+
+.contenido-pedido h2:first-of-type {
+    margin-top: 0;
+}
+
+.cliente-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.total-frutas {
+    background-color: #e0f7fa;
+    color: #00838f;
+    text-align: center;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+}
+
+/* Tabla de productos */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 25px;
+    font-size: 0.9rem;
+}
+
+th {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 2px solid #eee;
+    font-weight: 600;
+}
+
+td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+tfoot td {
+    border-bottom: none;
+    padding-top: 15px;
+}
+
+tfoot tr td:first-child {
+    text-align: right;
+}
+
+.emoji-fruta {
+    margin-right: 5px;
+}
+
+/* Caja de información de entrega */
+.entrega {
+    background: #fafafa;
+    border: 1px solid #eee;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.entrega .camion {
+    font-size: 1.8rem;
+}
+
+.entrega p {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* Botón volver */
+.volver-container {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.volver {
+    display: inline-block;
+    background-color: #1e88e5;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.volver:hover {
+    background-color: #1565c0;
+}

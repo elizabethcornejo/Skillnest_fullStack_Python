@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mercado de Frutas</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        🍎 Mercado de Frutas
+    </div>
+
+    <nav>
+        <a href="/">Inicio</a>
+        <a href="/frutas">Catálogo</a>
+    </nav>
+</header>
+
+
+<section class="hero">
+    <h1>Frutas Frescas a Tu Puerta</h1>
+    <p>Selecciona tus frutas favoritas y realiza tu pedido</p>
+</section>
+
+
+<main class="contenedor">
+
+    <section class="productos">
+
+        <h2>Selecciona tus frutas</h2>
+
+        <form action="/checkout" method="POST">
+
+            <div class="grid-frutas">
+
+                {% for fruta in frutas %}
+
+                <div class="tarjeta">
+
+                    <div class="imagen-fruta">
+                        <img src="{{ url_for('static',
+                        filename='img/' + fruta.imagen) }}"
+                        alt="{{ fruta.nombre }}">
+                    </div>
+
+                    <div class="info-fruta">
+
+                        <h3>{{ fruta.nombre }}</h3>
+
+                        <strong>${{ "%.1f"|format(fruta.precio) }}</strong>
+
+                        <p>{{ fruta.descripcion }}</p>
+
+                        <div class="cantidad">
+
+                            <button type="button" onclick="disminuir('{{ loop.index0 }}')">-</button>
+
+                                <inputtype="number"
+                                id="cantidad-{{ loop.index0 }}"
+                                name="cantidad_{{ loop.index0 }}"
+                                value="0"
+                                min="0">
+
+                            <button type="button" onclick="aumentar('{{ loop.index0 }}')">+</button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <div class="datos">
+
+                <h2>Información de Contacto</h2>
+
+                <label>Nombre</label>
+                <input type="text" name="nombre" required>
+
+                <label>Email</label>
+                <input type="email" name="email" required>
+
+                <label>Dirección de entrega</label>
+                <textarea name="direccion" required></textarea>
+
+                <button class="boton" type="submit">
+                    🛒 Crear Orden
+                </button>
+
+            </div>
+
+        </form>
+
+    </section>
+
+</main>
+
+
+<script>
+
+function aumentar(id) {
+
+    let input = document.getElementById("cantidad-" + id);
+
+    input.value = parseInt(input.value) + 1;
+}
+
+
+function disminuir(id) {
+
+    let input = document.getElementById("cantidad-" + id);
+
+    if (parseInt(input.value) > 0) {
+        input.value = parseInt(input.value) - 1;
+    }
+}
+
+</script>
+
+</body>
+</html>
