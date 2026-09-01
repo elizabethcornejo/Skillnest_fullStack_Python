@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayuda - Conceptos de Flask</title>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('index') }}">Inicio</a> | 
+        <a href="{{ url_for('ayuda') }}">Ayuda</a>
+    </nav>
+    <hr>
+
+    <h1>Conceptos Clave de Redirección</h1>
+    
+    <h3>¿Qué es una solicitud POST?</h3>
+    <p>Se utiliza para enviar datos al servidor (por ejemplo, al guardar un formulario). Los datos viajan en el cuerpo de la petición y no quedan expuestos en la URL.</p>
+
+    <h3>¿Qué es una solicitud GET?</h3>
+    <p>Se utiliza para solicitar o pedir información o vistas al servidor. Es la petición estándar cuando navegas por la web.</p>
+
+    <h3>¿Para qué sirve <code>redirect()</code>?</h3>
+    <p>Instruye al navegador del usuario a realizar una nueva petición a otra URL. Implementa el patrón POST → Redirect → GET (PRG).</p>
+
+    <h3>¿Por qué <code>request.form</code> está vacío tras la redirección?</h3>
+    <p>Porque la redirección finaliza la petición POST original y genera una <strong>nueva</strong> petición independiente de tipo GET. Los datos del cuerpo de la solicitud POST no viajan a la nueva solicitud.</p>
+
+    <hr>
+    <a href="{{ url_for('index') }}">Volver al formulario</a>
+</body>
+</html>
