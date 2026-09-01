@@ -22,5 +22,5 @@ jugadores = [
 # Ruta para personalizar el color del ranking
 @app.route("/jugadores/color/<color>")
 # Ejecutar el servidor
-if __name__ == "__main__":
-    app.run(debug=True)
+        if __name__ == "__main__":
+            0app.run(debug=True)
