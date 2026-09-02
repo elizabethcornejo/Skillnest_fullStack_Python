@@ -1,0 +1,265 @@
+/* --- Estilos Globales y Fondo --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    /* Fondo oscuro con patrón de puntos (dots pattern) */
+    background-color: #0d1117;
+    background-image: 
+        radial-gradient(#1f2937 1px, transparent 1px),
+        radial-gradient(#1f2937 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* --- Contenedor Principal (Panel Blanco) --- */
+.main-container {
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 500px;
+    overflow: hidden; /* Para que la cabecera oscura no se salga */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Cabecera Oscura del Panel --- */
+.header-dark {
+    background-color: #1f2937;
+    padding: 20px;
+    border-bottom: 2px solid #374151;
+}
+
+.header-dark h1 {
+    font-size: 24px;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.header-dark p {
+    font-size: 14px;
+    color: #9ca3af;
+    margin: 0;
+}
+
+.header-dark .header-icon {
+    font-size: 30px;
+    color: #8b5cf6; /* Morado */
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* --- Sección de Contenido Blanco --- */
+.content-white {
+    padding: 30px;
+    color: #1f2937;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* --- Estilos de Formulario (index.html) --- */
+.form-group {
+    position: relative;
+    text-align: left;
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    font-size: 18px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 15px 15px 15px 50px; /* Espacio para el ícono */
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    background-color: #f9fafb;
+    color: #1f2937;
+    font-size: 16px;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #8b5cf6;
+    background-color: #ffffff;
+}
+
+.form-help {
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 5px;
+    margin-left: 50px;
+}
+
+/* --- Botón Principal Púrpura (idéntico en ambas páginas) --- */
+.btn-reveal {
+    background: linear-gradient(90deg, #8b5cf6 0%, #7c3aed 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 15px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.1s, box-shadow 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-reveal:hover {
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+}
+
+.btn-reveal:active {
+    transform: scale(0.98);
+}
+
+/* --- Esfera de Cristal en el Formulario --- */
+.crystal-ball-container {
+    margin-top: -10px;
+}
+
+.crystal-ball {
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle at 30% 30%, #ffffff, #c4b5fd 40%, #8b5cf6 80%);
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.5);
+    margin: 0 auto;
+}
+
+/* --- Estilos de Predicción (futuro.html) --- */
+
+/* Títulos Púrpura en el contenido blanco */
+.content-title {
+    color: #6d28d9;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+/* Panel de Predicción General (con borde verde) */
+.prediction-card {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-left: 5px solid #10b981; /* Borde Verde */
+    border-radius: 10px;
+    padding: 20px;
+    text-align: left;
+}
+
+.prediction-card .card-icon {
+    font-size: 24px;
+    color: #10b981;
+    margin-bottom: 10px;
+}
+
+.prediction-card p {
+    font-size: 14px;
+    color: #1f2937;
+}
+
+/* Sección de Dos Columnas (Color y Animal) */
+.details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.detail-item {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: left;
+}
+
+.detail-item h3 {
+    font-size: 14px;
+    color: #1f2937;
+    margin-bottom: 10px;
+}
+
+.detail-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.detail-content .item-icon {
+    font-size: 24px;
+}
+
+.color-dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}
+
+.detail-item p {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+/* Sección Número de la Suerte */
+.lucky-number-section {
+    padding: 15px;
+}
+
+.lucky-number-display {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+    border-radius: 50%;
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 10px auto;
+}
+
+/* Sección Edad (con borde púrpura left) */
+.age-card {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-left: 5px solid #a855f7; /* Borde Púrpura */
+    border-radius: 10px;
+    padding: 15px;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.age-card p {
+    font-size: 12px;
+    color: #1f2937;
+}
+
+/* Pie de página pequeño */
+.footer-text {
+    font-size: 10px;
+    color: #6b7280;
+    margin-top: 15px;
+}
