@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mascotas</title>
+</head>
+<body>
+    <h1>Mascota Seleccionada</h1>
+    {% if mascota %}
+        <p>ID: {{ mascota.id }}</p>
+        <p>Nombre: {{ mascota.nombre }}</p>
+        <p>Tipo: {{ mascota.tipo }}</p>
+    {% else %}
+        <p>No se encontró la mascota.</p>
+    {% endif %}
+</body>
+</html>
