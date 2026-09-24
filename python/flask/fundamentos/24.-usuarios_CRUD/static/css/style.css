@@ -1,0 +1,55 @@
+body {
+    font-family: sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 500px;
+}
+
+table {
+    width: 500px;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+input[type="text"], input[type="email"] {
+    width: 300px;
+    padding: 5px;
+}
+
+button {
+    padding: 5px 15px;
+}
+
+.box-detalle {
+    border: 1px solid black;
+    padding: 15px;
+    width: 300px;
+    margin-bottom: 15px;
+}
+
+.acciones-detalle a {
+    margin-right: 15px;
+}

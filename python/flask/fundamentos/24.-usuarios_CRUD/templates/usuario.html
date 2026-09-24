@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ver Usuario</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Usuario {{ usuario.id }}</h1>
+
+    <div class="box-detalle">
+        <p><strong>Nombre Completo:</strong> {{ usuario.nombre }} {{ usuario.apellido }}</p>
+        <p><strong>E-mail:</strong> {{ usuario.email }}</p>
+        <p><strong>Fecha Creación:</strong> 
+            {% if usuario.created_at %}
+                {{ usuario.created_at.strftime("%Y-%m-%d") }}
+            {% endif %}
+        </p>
+        <p><strong>Fecha Actualización:</strong> 
+            {% if usuario.updated_at %}
+                {{ usuario.updated_at.strftime("%Y-%m-%d") }}
+            {% endif %}
+        </p>
+    </div>
+
+    <div class="acciones-detalle">
+        <a href="{{ url_for('editar_usuario', id=usuario.id) }}">Editar</a>
+        <a href="{{ url_for('borrar_usuario', id=usuario.id) }}">Borrar</a>
+    </div>
+</body>
+</html>
