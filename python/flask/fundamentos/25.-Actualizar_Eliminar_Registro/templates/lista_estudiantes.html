@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Estudiantes</title>
+</head>
+<body>
+
+    <h2>Lista de Estudiantes</h2>
+
+    {% for estudiante in estudiantes %}
+        <form action="/actualizar_estudiante" method="POST">
+            <input type="hidden" name="id" value="{{ estudiante.id }}">
+            <input type="text" name="nombre" value="{{ estudiante.nombre }}">
+            <input type="email" name="email" value="{{ estudiante.email }}">
+            <button type="submit">Actualizar</button>
+        </form>
+
+        <a href="/eliminar_estudiante/{{ estudiante.id }}" onclick="return confirm('¿Estás seguro de eliminar este estudiante?');">
+            Eliminar
+        </a>
+        <hr>
+    {% endfor %}
+
+</body>
+</html>
