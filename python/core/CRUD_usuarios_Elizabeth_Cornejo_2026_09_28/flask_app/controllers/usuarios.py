@@ -3,6 +3,11 @@ from flask_app import app
 from flask_app.models.usuario import Usuario
 
 
+@app.route("/")
+def inicio():
+    return "ESTE ES MI PROYECTO"
+
+
 @app.route("/usuarios")
 def usuarios():
     usuarios = Usuario.get_all()
