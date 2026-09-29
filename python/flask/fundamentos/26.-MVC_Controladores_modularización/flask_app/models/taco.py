@@ -1,7 +1,10 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 
+
 class Taco:
+
     def __init__(self, data):
+
         self.id = data["id"]
         self.tortilla = data["tortilla"]
         self.guiso = data["guiso"]
@@ -11,39 +14,114 @@ class Taco:
 
     @classmethod
     def save(cls, datos):
+
         query = """
-            INSERT INTO tacos (tortilla, guiso, salsa)
-            VALUES (%(tortilla)s, %(guiso)s, %(salsa)s);
+            INSERT INTO tacos
+            (
+                tortilla,
+                guiso,
+                salsa
+            )
+            VALUES
+            (
+                %(tortilla)s,
+                %(guiso)s,
+                %(salsa)s
+            );
         """
-        return connectToMySQL("esquema_tacos").query_db(query, datos)
+
+        return connectToMySQL(
+            "esquema_tacos"
+        ).query_db(
+            query,
+            datos
+        )
 
     @classmethod
     def get_all(cls):
-        query = "SELECT id, tortilla, guiso, salsa, created_at, updated_at FROM tacos ORDER BY id;"
-        tacos_en_bd = connectToMySQL("esquema_tacos").query_db(query)
+
+        query = """
+            SELECT
+                id,
+                tortilla,
+                guiso,
+                salsa,
+                created_at,
+                updated_at
+            FROM tacos
+            ORDER BY id;
+        """
+
+        tacos_en_bd = connectToMySQL(
+            "esquema_tacos"
+        ).query_db(
+            query
+        )
+
         tacos = []
+
         for taco in tacos_en_bd:
             tacos.append(cls(taco))
+
         return tacos
 
     @classmethod
     def get_one(cls, datos):
-        query = "SELECT id, tortilla, guiso, salsa, created_at, updated_at FROM tacos WHERE id = %(id)s;"
-        taco_en_db = connectToMySQL("esquema_tacos").query_db(query, datos)
+
+        query = """
+            SELECT
+                id,
+                tortilla,
+                guiso,
+                salsa,
+                created_at,
+                updated_at
+            FROM tacos
+            WHERE id = %(id)s;
+        """
+
+        taco_en_db = connectToMySQL(
+            "esquema_tacos"
+        ).query_db(
+            query,
+            datos
+        )
+
         if not taco_en_db:
             return None
+
         return cls(taco_en_db[0])
 
     @classmethod
     def update(cls, datos):
+
         query = """
             UPDATE tacos
-            SET tortilla = %(tortilla)s, guiso = %(guiso)s, salsa = %(salsa)s
+            SET
+                tortilla = %(tortilla)s,
+                guiso = %(guiso)s,
+                salsa = %(salsa)s
             WHERE id = %(id)s;
         """
-        return connectToMySQL("esquema_tacos").query_db(query, datos)
+
+        return connectToMySQL(
+            "esquema_tacos"
+        ).query_db(
+            query,
+            datos
+        )
 
     @classmethod
     def delete(cls, datos):
-        query = "DELETE FROM tacos WHERE id = %(id)s;"
-        return connectToMySQL("esquema_tacos").query_db(query, datos)
+
+        query = """
+            DELETE FROM tacos
+            WHERE id = %(id)s;
+        """
+
+        return connectToMySQL(
+            "esquema_tacos"
+        ).query_db(
+            query,
+            datos
+        )
