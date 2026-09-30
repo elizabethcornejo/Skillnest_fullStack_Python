@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Seguidores</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <h1>Seguidores</h1>
+
+        {% with mensajes = get_flashed_messages(with_categories=true) %}
+
+            {% if mensajes %}
+
+                {% for categoria, mensaje in mensajes %}
+
+                    <div class="mensaje {{ categoria }}">
+                        {{ mensaje }}
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Usuario</th>
+                    <th>Seguidor</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for relacion in relaciones %}
+
+                    <tr>
+
+                        <td>
+                            {{ relacion.usuario_nombre }}
+                        </td>
+
+                        <td>
+                            {{ relacion.seguidor_nombre }}
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+
+        <div class="formularios">
+
+            <div>
+
+                <h2>Nuevo Usuario</h2>
+
+                <form
+                    action="{{ url_for('crear_usuario') }}"
+                    method="POST"
+                >
+
+                    <label>Nombre:</label>
+
+                    <input
+                        type="text"
+                        name="nombre"
+                        required
+                    >
+
+                    <label>Apellido:</label>
+
+                    <input
+                        type="text"
+                        name="apellido"
+                        required
+                    >
+
+                    <label>E-mail:</label>
+
+                    <input
+                        type="email"
+                        name="email"
+                        required
+                    >
+
+                    <button type="submit">
+                        Crear
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <div>
+
+                <h2>Seguir</h2>
+
+                <form
+                    action="{{ url_for('seguir') }}"
+                    method="POST"
+                >
+
+                    <label>Usuario:</label>
+
+                    <select name="usuario_id" required>
+
+                        <option value="">
+                            Seleccionar
+                        </option>
+
+                        {% for usuario in usuarios %}
+
+                            <option value="{{ usuario.id }}">
+
+                                {{ usuario.nombre }}
+                                {{ usuario.apellido }}
+
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
+
+
+                    <label>Seguidor:</label>
+
+                    <select name="seguidor_id" required>
+
+                        <option value="">
+                            Seleccionar
+                        </option>
+
+                        {% for usuario in usuarios %}
+
+                            <option value="{{ usuario.id }}">
+
+                                {{ usuario.nombre }}
+                                {{ usuario.apellido }}
+
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
+
+
+                    <button type="submit">
+                        Seguir
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
