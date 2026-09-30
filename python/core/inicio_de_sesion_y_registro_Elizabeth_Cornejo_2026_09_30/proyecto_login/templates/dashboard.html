@@ -3,45 +3,19 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Dashboard</title>
-
+    <title>Inicio</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 <body>
 
-    <main class="dashboard">
+    <div class="pagina-exito">
 
-        <h1>¡Bienvenido!</h1>
+        <h1>¡Hola {{ usuario[1] }}!</h1>
 
-        <p>Has iniciado sesión correctamente.</p>
+        <a href="/logout">Cerrar Sesión</a>
 
-        <div class="informacion">
-
-            <p>
-                <strong>Nombre:</strong>
-                {{ usuario[1] }}
-            </p>
-
-            <p>
-                <strong>Apellido:</strong>
-                {{ usuario[2] }}
-            </p>
-
-            <p>
-                <strong>Email:</strong>
-                {{ usuario[3] }}
-            </p>
-
-        </div>
-
-        <a href="/logout">
-            <button>Cerrar sesión</button>
-        </a>
-
-    </main>
+    </div>
 
 </body>
 

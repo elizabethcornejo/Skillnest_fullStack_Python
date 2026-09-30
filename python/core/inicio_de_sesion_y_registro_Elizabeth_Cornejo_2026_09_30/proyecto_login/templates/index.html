@@ -3,88 +3,91 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Registro e Inicio de Sesión</title>
-
+    <title>Inicio</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 <body>
 
-    <main class="contenedor">
+    <div class="contenedor">
 
-        <section class="formulario">
+        <div class="registro">
 
-            <h1>Registrarse</h1>
+            <h1>Registro</h1>
 
             {% if errores_registro %}
                 <div class="errores">
-
                     {% for error in errores_registro %}
                         <p>{{ error }}</p>
                     {% endfor %}
-
                 </div>
             {% endif %}
 
             <form action="/registro" method="POST">
 
-                <label>Nombre</label>
-                <input type="text" name="nombre">
+                <div class="campo">
+                    <label>Nombre</label>
+                    <input type="text" name="nombre">
+                </div>
 
-                <label>Apellido</label>
-                <input type="text" name="apellido">
+                <div class="campo">
+                    <label>Apellido</label>
+                    <input type="text" name="apellido">
+                </div>
 
-                <label>Correo electrónico</label>
-                <input type="email" name="email">
+                <div class="campo">
+                    <label>E-mail</label>
+                    <input type="email" name="email">
+                </div>
 
-                <label>Contraseña</label>
-                <input type="password" name="password">
+                <div class="campo">
+                    <label>Contraseña</label>
+                    <input type="password" name="password">
+                </div>
 
-                <label>Confirmar contraseña</label>
-                <input type="password" name="confirmar">
+                <div class="campo">
+                    <label>Conf. Contraseña</label>
+                    <input type="password" name="confirmar">
+                </div>
 
-                <button type="submit">
-                    Registrarse
-                </button>
+                <button type="submit">Registrar</button>
 
             </form>
 
-        </section>
+        </div>
 
 
-        <section class="formulario">
+        <div class="login">
 
-            <h1>Iniciar sesión</h1>
+            <h1>Inicio de Sesión</h1>
 
             {% if errores_login %}
                 <div class="errores">
-
                     {% for error in errores_login %}
                         <p>{{ error }}</p>
                     {% endfor %}
-
                 </div>
             {% endif %}
 
             <form action="/login" method="POST">
 
-                <label>Correo electrónico</label>
-                <input type="email" name="email">
+                <div class="campo">
+                    <label>E-mail</label>
+                    <input type="email" name="email">
+                </div>
 
-                <label>Contraseña</label>
-                <input type="password" name="password">
+                <div class="campo">
+                    <label>Contraseña</label>
+                    <input type="password" name="password">
+                </div>
 
-                <button type="submit">
-                    Iniciar sesión
-                </button>
+                <button type="submit">Iniciar Sesión</button>
 
             </form>
 
-        </section>
+        </div>
 
-    </main>
+    </div>
 
 </body>
 

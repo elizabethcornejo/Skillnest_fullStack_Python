@@ -4,80 +4,81 @@
 
 body {
     margin: 0;
+    padding: 0;
     font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
+    background-color: white;
 }
 
 .contenedor {
+    width: 750px;
+    margin: 50px auto;
     display: flex;
     justify-content: center;
-    gap: 30px;
-    padding: 50px;
+    gap: 50px;
 }
 
-.formulario {
-    width: 400px;
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+.registro,
+.login {
+    width: 320px;
 }
 
-h1 {
+.registro h1,
+.login h1 {
     text-align: center;
+    font-size: 24px;
+    margin-bottom: 25px;
 }
 
-label {
-    display: block;
-    margin-top: 15px;
-    margin-bottom: 5px;
+.campo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
-input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.campo label {
+    width: 120px;
+    font-size: 14px;
+}
+
+.campo input {
+    width: 160px;
+    height: 25px;
+    padding: 3px;
+    border: 1px solid #555;
 }
 
 button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #2563eb;
-    color: white;
+    display: block;
+    margin: 15px auto;
+    padding: 5px 10px;
+    background-color: white;
+    border: 1px solid #333;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #1d4ed8;
+    background-color: #eeeeee;
 }
 
 .errores {
-    background-color: #ffe5e5;
-    color: #b91c1c;
-    padding: 10px;
+    color: red;
+    font-size: 13px;
     margin-bottom: 15px;
-    border-radius: 5px;
 }
 
 .errores p {
     margin: 5px 0;
 }
 
-.dashboard {
-    width: 500px;
-    margin: 100px auto;
-    padding: 40px;
-    background-color: white;
-    text-align: center;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+.pagina-exito {
+    margin: 70px 0 0 80px;
 }
 
-.informacion {
-    text-align: left;
-    margin-top: 30px;
+.pagina-exito h1 {
+    font-size: 32px;
+}
+
+.pagina-exito a {
+    color: blue;
+    text-decoration: underline;
 }
