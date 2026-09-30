@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <main class="dashboard">
+
+        <h1>¡Bienvenido!</h1>
+
+        <p>Has iniciado sesión correctamente.</p>
+
+        <div class="informacion">
+
+            <p>
+                <strong>Nombre:</strong>
+                {{ usuario[1] }}
+            </p>
+
+            <p>
+                <strong>Apellido:</strong>
+                {{ usuario[2] }}
+            </p>
+
+            <p>
+                <strong>Email:</strong>
+                {{ usuario[3] }}
+            </p>
+
+        </div>
+
+        <a href="/logout">
+            <button>Cerrar sesión</button>
+        </a>
+
+    </main>
+
+</body>
+
+</html>
