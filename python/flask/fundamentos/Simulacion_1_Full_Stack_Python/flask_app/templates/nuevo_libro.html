@@ -1,0 +1,240 @@
+{% extends "base.html" %}
+
+{% block title %}BookHub - Mis Libros{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h1>
+                Mis Libros
+            </h1>
+
+            <p class="text-muted">
+                Libros que has publicado en BookHub.
+            </p>
+
+        </div>
+
+        <a href="{{ url_for('libros.nuevo') }}"
+           class="btn btn-primary">
+
+            + Nuevo Libro
+
+        </a>
+
+    </div>
+
+
+    <div class="card shadow-sm mb-5">
+
+        <div class="card-body">
+
+            <h3 class="mb-3">
+                Mis Libros
+            </h3>
+
+            {% if mis_libros %}
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered table-hover">
+
+                    <thead class="table-light">
+
+                        <tr>
+
+                            <th>Título</th>
+                            <th>Autor</th>
+                            <th>Género</th>
+                            <th>Fecha</th>
+                            <th>Favoritos</th>
+                            <th>Acciones</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for libro in mis_libros %}
+
+                        <tr>
+
+                            <td>
+                                {{ libro.titulo }}
+                            </td>
+
+                            <td>
+                                {{ libro.autor }}
+                            </td>
+
+                            <td>
+                                {{ libro.genero }}
+                            </td>
+
+                            <td>
+                                {{ libro.fecha_publicacion }}
+                            </td>
+
+                            <td>
+                                ❤️ {{ libro.favoritos }}
+                            </td>
+
+                            <td>
+
+                                <a href="{{ url_for('libros.detalle', libro_id=libro.id) }}"
+                                   class="btn btn-sm btn-primary">
+                                    Ver
+                                </a>
+
+                                <a href="{{ url_for('libros.editar', libro_id=libro.id) }}"
+                                   class="btn btn-sm btn-warning">
+                                    Editar
+                                </a>
+
+                                <form action="{{ url_for('libros.eliminar', libro_id=libro.id) }}"
+                                      method="POST"
+                                      style="display:inline;">
+
+                                    <button type="submit"
+                                            class="btn btn-sm btn-danger"
+                                            onclick="return confirm('¿Seguro que quieres eliminar este libro?');">
+
+                                        Borrar
+
+                                    </button>
+
+                                </form>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {% else %}
+
+            <div class="alert alert-info">
+
+                Todavía no tienes libros registrados.
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+
+    <div class="card shadow-sm" id="comunidad">
+
+        <div class="card-body">
+
+            <h3 class="mb-3">
+                Libros de la Comunidad
+            </h3>
+
+            <p class="text-muted">
+                Libros publicados por otros usuarios de BookHub.
+            </p>
+
+
+            {% if comunidad %}
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered table-hover">
+
+                    <thead class="table-light">
+
+                        <tr>
+
+                            <th>Título</th>
+                            <th>Autor</th>
+                            <th>Género</th>
+                            <th>Publicado por</th>
+                            <th>Favoritos</th>
+                            <th>Acción</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for libro in comunidad %}
+
+                        <tr>
+
+                            <td>
+                                {{ libro.titulo }}
+                            </td>
+
+                            <td>
+                                {{ libro.autor }}
+                            </td>
+
+                            <td>
+                                {{ libro.genero }}
+                            </td>
+
+                            <td>
+                                {{ libro.publicado_por }}
+                            </td>
+
+                            <td>
+                                ❤️ {{ libro.favoritos }}
+                            </td>
+
+                            <td>
+
+                                <a href="{{ url_for('libros.detalle', libro_id=libro.id) }}"
+                                   class="btn btn-sm btn-primary">
+
+                                    Ver
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {% else %}
+
+            <div class="alert alert-info">
+
+                Todavía no hay libros publicados por la comunidad.
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
