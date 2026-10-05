@@ -1,17 +1,17 @@
-import os
 from flask import Flask
 from flask_bcrypt import Bcrypt
-from dotenv import load_dotenv
 
 from flask_app.controllers.usuarios_controller import usuarios
 from flask_app.controllers.libros_controller import libros
 from flask_app.controllers.favoritos_controller import favoritos
 
-load_dotenv()
+app = Flask(
+    __name__,
+    template_folder="flask_app/templates",
+    static_folder="flask_app/static"
+)
 
-app = Flask(__name__)
-
-app.secret_key = os.getenv("SECRET_KEY", "clave-secreta")
+app.secret_key = "bookhub_clave_secreta"
 
 bcrypt = Bcrypt(app)
 

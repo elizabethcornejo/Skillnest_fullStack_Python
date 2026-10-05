@@ -1,112 +1,131 @@
-from flask import Blueprint, render_template, redirect, request, session, flash
+from flask import Blueprint, render_template, request, redirect, session, flash
 from flask_app.models.libro import Libro
-from flask_app.models.favorito import Favorito
 
 libros = Blueprint("libros", __name__)
 
 
 @libros.route("/libros")
-def lista_libros():
+def mostrar_libros():
 
     if "usuario_id" not in session:
         return redirect("/login")
 
     mis_libros = Libro.mis_libros(session["usuario_id"])
-    todos_libros = Libro.todos()
+    comunidad = Libro.todos()
 
     return render_template(
         "libros.html",
         mis_libros=mis_libros,
-        todos_libros=todos_libros
+        comunidad=comunidad
     )
 
 
-@libros.route("/libros/nuevo", methods=["GET", "POST"])
+@libros.route("/libros/nuevo")
 def nuevo():
 
     if "usuario_id" not in session:
         return redirect("/login")
 
-    if request.method == "POST":
-
-        datos = {
-            "titulo": request.form["titulo"],
-            "autor": request.form["autor"],
-            "genero": request.form["genero"],
-            "fecha_publicacion": request.form["fecha_publicacion"],
-            "descripcion": request.form["descripcion"],
-            "usuario_id": session["usuario_id"]
-        }
-
-        if not datos["titulo"] or not datos["autor"]:
-            flash("Completa los campos obligatorios")
-            return redirect("/libros/nuevo")
-
-        Libro.crear(datos)
-
-        flash("Libro creado correctamente")
-        return redirect("/libros")
-
     return render_template("nuevo_libro.html")
 
 
-@libros.route("/libros/<int:libro_id>")
-def detalle(libro_id):
+@libros.route("/libros/crear", methods=["POST"])
+def crear():
 
     if "usuario_id" not in session:
         return redirect("/login")
 
-    libro = Libro.buscar_por_id(libro_id)
+    titulo = request.form["titulo"].strip()
+    autor = request.form["autor"].strip()
+    genero = request.form["genero"].strip()
+    fecha = request.form["fecha_publicacion"]
+    descripcion = request.form["descripcion"].strip()
 
-    if not libro:
-        flash("Libro no encontrado")
+    if len(titulo) < 2:
+        flash("El título debe tener al menos 2 caracteres")
+        return redirect("/libros/nuevo")
+
+    if len(autor) < 2:
+        flash("El autor debe tener al menos 2 caracteres")
+        return redirect("/libros/nuevo")
+
+    if genero == "":
+        flash("Debes seleccionar un género")
+        return redirect("/libros/nuevo")
+
+    if fecha == "":
+        flash("Debes ingresar una fecha de publicación")
+        return redirect("/libros/nuevo")
+
+    if len(descripcion) < 10:
+        flash("La descripción debe tener al menos 10 caracteres")
+        return redirect("/libros/nuevo")
+
+    data = {
+        "titulo": titulo,
+        "autor": autor,
+        "genero": genero,
+        "fecha_publicacion": fecha,
+        "descripcion": descripcion,
+        "usuario_id": session["usuario_id"]
+    }
+
+    Libro.crear(data)
+
+    flash("Libro agregado correctamente")
+
+    return redirect("/libros")
+
+
+@libros.route("/libros/<int:id>")
+def detalle(id):
+
+    if "usuario_id" not in session:
+        return redirect("/login")
+
+    libro = Libro.buscar_por_id(id)
+
+    if libro is None:
+        flash("El libro no existe")
         return redirect("/libros")
-
-    favorito = Favorito.existe(
-        session["usuario_id"],
-        libro_id
-    )
-
-    usuarios_favoritos = Favorito.usuarios_del_libro(libro_id)
 
     return render_template(
         "detalle_libro.html",
-        libro=libro,
-        favorito=favorito,
-        usuarios_favoritos=usuarios_favoritos
+        libro=libro
     )
 
 
-@libros.route("/libros/editar/<int:libro_id>", methods=["GET", "POST"])
-def editar(libro_id):
+@libros.route("/libros/eliminar/<int:id>")
+def eliminar(id):
 
     if "usuario_id" not in session:
         return redirect("/login")
 
-    libro = Libro.buscar_por_id(libro_id)
+    Libro.eliminar(
+        id,
+        session["usuario_id"]
+    )
 
-    if not libro:
-        flash("Libro no encontrado")
+    flash("Libro eliminado")
+
+    return redirect("/libros")
+
+
+@libros.route("/libros/editar/<int:id>")
+def editar(id):
+
+    if "usuario_id" not in session:
+        return redirect("/login")
+
+    libro = Libro.buscar_por_id(id)
+
+    if libro is None:
+        flash("El libro no existe")
         return redirect("/libros")
 
     if libro["usuario_id"] != session["usuario_id"]:
         flash("No puedes editar este libro")
         return redirect("/libros")
-
-    if request.method == "POST":
-
-        datos = {
-            "titulo": request.form["titulo"],
-            "autor": request.form["autor"],
-            "genero": request.form["genero"],
-            "fecha_publicacion": request.form["fecha_publicacion"],
-            "descripcion": request.form["descripcion"]
-        }
-
-        Libro.actualizar(libro_id, session["usuario_id"], datos)
-
-        flash("Libro actualizado correctamente")
-        return redirect("/libros/" + str(libro_id))
 
     return render_template(
         "editar_libro.html",
@@ -114,17 +133,44 @@ def editar(libro_id):
     )
 
 
-@libros.route("/libros/eliminar/<int:libro_id>", methods=["POST"])
-def eliminar(libro_id):
+@libros.route("/libros/actualizar", methods=["POST"])
+def actualizar():
 
     if "usuario_id" not in session:
         return redirect("/login")
 
-    Libro.eliminar(
-        libro_id,
-        session["usuario_id"]
-    )
+    data = {
+        "id": request.form["id"],
+        "titulo": request.form["titulo"].strip(),
+        "autor": request.form["autor"].strip(),
+        "genero": request.form["genero"].strip(),
+        "fecha_publicacion": request.form["fecha_publicacion"],
+        "descripcion": request.form["descripcion"].strip(),
+        "usuario_id": session["usuario_id"]
+    }
 
-    flash("Libro eliminado correctamente")
+    if len(data["titulo"]) < 2:
+        flash("El título debe tener al menos 2 caracteres")
+        return redirect("/libros/editar/" + data["id"])
+
+    if len(data["autor"]) < 2:
+        flash("El autor debe tener al menos 2 caracteres")
+        return redirect("/libros/editar/" + data["id"])
+
+    if data["genero"] == "":
+        flash("Debes seleccionar un género")
+        return redirect("/libros/editar/" + data["id"])
+
+    if data["fecha_publicacion"] == "":
+        flash("Debes ingresar una fecha de publicación")
+        return redirect("/libros/editar/" + data["id"])
+
+    if len(data["descripcion"]) < 10:
+        flash("La descripción debe tener al menos 10 caracteres")
+        return redirect("/libros/editar/" + data["id"])
+
+    Libro.actualizar(data)
+
+    flash("Libro actualizado correctamente")
 
     return redirect("/libros")

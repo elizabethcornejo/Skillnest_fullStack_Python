@@ -1,237 +1,214 @@
 {% extends "base.html" %}
 
-{% block title %}BookHub - Mis Libros{% endblock %}
+{% block contenido %}
 
-{% block content %}
+<div class="titulo-pagina">
 
-<div class="container mt-4">
+    <div>
+        <h1>Mis Libros</h1>
+        <p>Administra los libros que has agregado a BookHub.</p>
+    </div>
+
+    <a href="/libros/nuevo" class="btn btn-nuevo">
+        + Nuevo Libro
+    </a>
+
+</div>
 
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+<!-- MIS LIBROS -->
+
+<div class="seccion">
+
+    <div class="tabla-contenedor">
+
+        <table class="tabla-libros">
+
+            <thead>
+
+                <tr>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Género</th>
+                    <th>Fecha</th>
+                    <th>Favoritos</th>
+                    <th>Acciones</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for libro in mis_libros %}
+
+                <tr>
+
+                    <td class="titulo-libro">
+                        {{ libro.titulo }}
+                    </td>
+
+                    <td>
+                        {{ libro.autor }}
+                    </td>
+
+                    <td>
+                        <span class="genero">
+                            {{ libro.genero }}
+                        </span>
+                    </td>
+
+                    <td>
+                        {{ libro.fecha_publicacion }}
+                    </td>
+
+                    <td class="favoritos">
+                        ❤️ {{ libro.favoritos }}
+                    </td>
+
+                    <td class="acciones">
+
+                        <a
+                            href="/libros/{{ libro.id }}"
+                            class="btn-ver"
+                        >
+                            Ver
+                        </a>
+
+                        <a
+                            href="/libros/editar/{{ libro.id }}"
+                            class="btn-editar"
+                        >
+                            Editar
+                        </a>
+
+                        <a
+                            href="/libros/eliminar/{{ libro.id }}"
+                            class="btn-borrar"
+                        >
+                            Borrar
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+
+                    <td colspan="6" class="sin-libros">
+
+                        Todavía no tienes libros registrados.
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+<!-- COMUNIDAD -->
+
+<div class="seccion comunidad">
+
+    <div class="titulo-seccion">
 
         <div>
 
-            <h1>
-                Mis Libros
-            </h1>
+            <h2>Libros de la Comunidad</h2>
 
-            <p class="text-muted">
-                Libros que has publicado en BookHub.
+            <p>
+                Descubre libros publicados por otros usuarios.
             </p>
-
-        </div>
-
-        <a href="{{ url_for('libros.nuevo') }}"
-           class="btn btn-primary">
-
-            + Nuevo Libro
-
-        </a>
-
-    </div>
-
-
-    <div class="card shadow-sm mb-5">
-
-        <div class="card-body">
-
-            <h3 class="mb-3">
-                Mis Libros
-            </h3>
-
-            {% if mis_libros %}
-
-            <div class="table-responsive">
-
-                <table class="table table-bordered table-hover">
-
-                    <thead class="table-light">
-
-                        <tr>
-
-                            <th>Título</th>
-                            <th>Autor</th>
-                            <th>Género</th>
-                            <th>Fecha</th>
-                            <th>Favoritos</th>
-                            <th>Acciones</th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody>
-
-                        {% for libro in mis_libros %}
-
-                        <tr>
-
-                            <td>
-                                {{ libro.titulo }}
-                            </td>
-
-                            <td>
-                                {{ libro.autor }}
-                            </td>
-
-                            <td>
-                                {{ libro.genero }}
-                            </td>
-
-                            <td>
-                                {{ libro.fecha_publicacion }}
-                            </td>
-
-                            <td>
-                                ❤️ {{ libro.favoritos }}
-                            </td>
-
-                            <td>
-
-                                <a href="{{ url_for('libros.detalle', libro_id=libro.id) }}"
-                                   class="btn btn-sm btn-primary">
-                                    Ver
-                                </a>
-
-                                <a href="{{ url_for('libros.editar', libro_id=libro.id) }}"
-                                   class="btn btn-sm btn-warning">
-                                    Editar
-                                </a>
-
-                                <form action="{{ url_for('libros.eliminar', libro_id=libro.id) }}"
-                                      method="POST"
-                                      style="display:inline;">
-
-                                    <button type="submit"
-                                            class="btn btn-sm btn-danger"
-                                            onclick="return confirm('¿Seguro que quieres eliminar este libro?');">
-
-                                        Borrar
-
-                                    </button>
-
-                                </form>
-
-                            </td>
-
-                        </tr>
-
-                        {% endfor %}
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-            {% else %}
-
-            <div class="alert alert-info">
-
-                Todavía no tienes libros registrados.
-
-            </div>
-
-            {% endif %}
 
         </div>
 
     </div>
 
 
+    <div class="tabla-contenedor">
 
-    <div class="card shadow-sm" id="comunidad">
+        <table class="tabla-libros">
 
-        <div class="card-body">
+            <thead>
 
-            <h3 class="mb-3">
-                Libros de la Comunidad
-            </h3>
+                <tr>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Género</th>
+                    <th>Publicado por</th>
+                    <th>Favoritos</th>
+                    <th>Acción</th>
+                </tr>
 
-            <p class="text-muted">
-                Libros publicados por otros usuarios de BookHub.
-            </p>
+            </thead>
 
+            <tbody>
 
-            {% if comunidad %}
+                {% for libro in comunidad %}
 
-            <div class="table-responsive">
+                <tr>
 
-                <table class="table table-bordered table-hover">
+                    <td class="titulo-libro">
+                        {{ libro.titulo }}
+                    </td>
 
-                    <thead class="table-light">
+                    <td>
+                        {{ libro.autor }}
+                    </td>
 
-                        <tr>
+                    <td>
+                        <span class="genero">
+                            {{ libro.genero }}
+                        </span>
+                    </td>
 
-                            <th>Título</th>
-                            <th>Autor</th>
-                            <th>Género</th>
-                            <th>Publicado por</th>
-                            <th>Favoritos</th>
-                            <th>Acción</th>
+                    <td>
+                        {{ libro.publicado_por }}
+                    </td>
 
-                        </tr>
+                    <td class="favoritos">
+                        ❤️ {{ libro.favoritos }}
+                    </td>
 
-                    </thead>
+                    <td>
 
-                    <tbody>
+                        <a
+                            href="/libros/{{ libro.id }}"
+                            class="btn-ver"
+                        >
+                            Ver
+                        </a>
 
-                        {% for libro in comunidad %}
+                    </td>
 
-                        <tr>
+                </tr>
 
-                            <td>
-                                {{ libro.titulo }}
-                            </td>
+                {% else %}
 
-                            <td>
-                                {{ libro.autor }}
-                            </td>
+                <tr>
 
-                            <td>
-                                {{ libro.genero }}
-                            </td>
+                    <td colspan="6" class="sin-libros">
 
-                            <td>
-                                {{ libro.publicado_por }}
-                            </td>
+                        Todavía no hay libros de la comunidad.
 
-                            <td>
-                                ❤️ {{ libro.favoritos }}
-                            </td>
+                    </td>
 
-                            <td>
+                </tr>
 
-                                <a href="{{ url_for('libros.detalle', libro_id=libro.id) }}"
-                                   class="btn btn-sm btn-primary">
+                {% endfor %}
 
-                                    Ver
+            </tbody>
 
-                                </a>
-
-                            </td>
-
-                        </tr>
-
-                        {% endfor %}
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-            {% else %}
-
-            <div class="alert alert-info">
-
-                Todavía no hay libros publicados por la comunidad.
-
-            </div>
-
-            {% endif %}
-
-        </div>
+        </table>
 
     </div>
 

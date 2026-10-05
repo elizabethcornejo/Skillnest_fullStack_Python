@@ -1,68 +1,73 @@
 from flask_app.config.mysqlconnection import MySQLConnection
 
+
 class Usuario:
+
+    def __init__(self, data):
+        self.id = data["id"]
+        self.nombre = data["nombre"]
+        self.apellido = data["apellido"]
+        self.email = data["email"]
+        self.password = data["password"]
 
     @classmethod
     def crear(cls, data):
+
         query = """
         INSERT INTO usuarios
-        (nombre, apellido, email, password)
-        VALUES (%s, %s, %s, %s)
+        (
+            nombre,
+            apellido,
+            email,
+            password
+        )
+        VALUES
+        (
+            %(nombre)s,
+            %(apellido)s,
+            %(email)s,
+            %(password)s
+        )
         """
 
-        conexion = MySQLConnection.connectToMySQL()
-        cursor = conexion.cursor()
-
-        cursor.execute(query, (
-            data["nombre"],
-            data["apellido"],
-            data["email"],
-            data["password"]
-        ))
-
-        nuevo_id = cursor.lastrowid
-
-        cursor.close()
-        conexion.close()
-
-        return nuevo_id
+        return MySQLConnection("bookhub").query_db(query, data)
 
     @classmethod
     def buscar_por_email(cls, email):
+
         query = """
         SELECT *
         FROM usuarios
-        WHERE email = %s
+        WHERE email = %(email)s
         """
 
-        conexion = MySQLConnection.connectToMySQL()
-        cursor = conexion.cursor()
+        data = {
+            "email": email
+        }
 
-        cursor.execute(query, (email,))
+        resultado = MySQLConnection("bookhub").query_db(query, data)
 
-        usuario = cursor.fetchone()
+        if resultado:
+            return cls(resultado[0])
 
-        cursor.close()
-        conexion.close()
-
-        return usuario
+        return None
 
     @classmethod
-    def buscar_por_id(cls, usuario_id):
+    def buscar_por_id(cls, id):
+
         query = """
         SELECT *
         FROM usuarios
-        WHERE id = %s
+        WHERE id = %(id)s
         """
 
-        conexion = MySQLConnection.connectToMySQL()
-        cursor = conexion.cursor()
+        data = {
+            "id": id
+        }
 
-        cursor.execute(query, (usuario_id,))
+        resultado = MySQLConnection("bookhub").query_db(query, data)
 
-        usuario = cursor.fetchone()
+        if resultado:
+            return cls(resultado[0])
 
-        cursor.close()
-        conexion.close()
-
-        return usuario
+        return None

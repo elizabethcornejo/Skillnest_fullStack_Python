@@ -1,54 +1,72 @@
-from flask import Blueprint, render_template, redirect, session, request, flash
-from flask_app.models.favorito import Favorito
-from flask_app.models.libro import Libro
+from flask import Blueprint, redirect, session, render_template
 
-favoritos = Blueprint("favoritos", __name__)
+
+from flask_app.models.favorito import Favorito
+
+
+
+favoritos = Blueprint(
+    "favoritos",
+    __name__
+)
+
+
+
+
+@favoritos.route("/favorito/<int:id>")
+def agregar(id):
+
+
+    data={
+
+
+        "usuario_id":session["usuario_id"],
+
+        "libro_id":id
+
+    }
+
+
+
+    if not Favorito.existe(data):
+
+
+        Favorito.agregar(data)
+
+
+
+    return redirect(
+        f"/libros/{id}"
+    )
+
+
+
+
 
 
 @favoritos.route("/favoritos")
-def lista():
+def mostrar():
+
+
 
     if "usuario_id" not in session:
+
         return redirect("/login")
 
-    mis_favoritos = Favorito.mis_favoritos(
+
+
+    libros = Favorito.mis_favoritos(
+
         session["usuario_id"]
+
     )
+
+
 
     return render_template(
+
         "favoritos.html",
-        favoritos=mis_favoritos
+
+        libros=libros
+
     )
-
-
-@favoritos.route("/favoritos/<int:libro_id>/toggle", methods=["POST"])
-def toggle(libro_id):
-
-    if "usuario_id" not in session:
-        return redirect("/login")
-
-    libro = Libro.buscar_por_id(libro_id)
-
-    if not libro:
-        flash("Libro no encontrado")
-        return redirect("/libros")
-
-    favorito = Favorito.existe(
-        session["usuario_id"],
-        libro_id
-    )
-
-    if favorito:
-        Favorito.eliminar(
-            session["usuario_id"],
-            libro_id
-        )
-        flash("Libro eliminado de favoritos")
-    else:
-        Favorito.agregar(
-            session["usuario_id"],
-            libro_id
-        )
-        flash("Libro agregado a favoritos")
-
-    return redirect("/libros/" + str(libro_id))

@@ -1,88 +1,343 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
-    background: #f4f7fb;
-    color: #202733;
+    margin: 0;
+    background-color: #f5f6f8;
+    color: #202124;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.navbar-bookhub {
-    background: #222831;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+
+/* NAVBAR */
+
+.bookhub-navbar {
+    background-color: #20252a;
+    min-height: 70px;
+    border-bottom: 3px solid #eeeeee;
+}
+
+.bookhub-navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .navbar-brand {
-    font-size: 1.35rem;
+    color: white !important;
+    font-size: 27px;
+    font-weight: bold;
+    text-decoration: none;
 }
 
-.auth-page {
-    max-width: 1000px;
-    margin: 30px auto;
+.navbar-brand:hover {
+    color: white !important;
 }
 
-.brand-section {
-    text-align: center;
-    margin-bottom: 35px;
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 28px;
 }
 
-.brand-section h1 {
-    font-size: 3rem;
-    font-weight: 700;
+.menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
 }
 
-.book-icon {
-    font-size: 3rem;
+.menu a:hover {
+    color: #d8d8d8;
 }
 
-.book-card {
-    border: 0;
-    border-radius: 18px;
-    box-shadow: 0 5px 20px rgba(31, 41, 55, 0.08);
+
+/* CONTENIDO */
+
+.principal {
+    padding-top: 32px;
+    padding-bottom: 50px;
 }
 
-.section-title {
-    font-size: 1.4rem;
-    font-weight: 700;
+
+/* TITULO */
+
+.titulo-pagina {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
 }
 
-.btn-primary {
-    background: #2563eb;
-    border-color: #2563eb;
+.titulo-pagina h1 {
+    margin: 0;
+    font-size: 38px;
+    font-weight: 500;
 }
 
-.btn-primary:hover {
-    background: #1d4ed8;
-    border-color: #1d4ed8;
+.titulo-pagina p {
+    margin-top: 7px;
+    margin-bottom: 0;
+    color: #777;
+    font-size: 15px;
 }
 
-.table thead th {
-    background: #e9eef7;
+
+/* BOTON NUEVO */
+
+.btn-nuevo {
+    background-color: #1769e0;
+    color: white;
+    padding: 13px 23px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.btn-nuevo:hover {
+    background-color: #0f56bd;
+    color: white;
+}
+
+
+/* SECCIONES */
+
+.seccion {
+    margin-bottom: 38px;
+}
+
+.comunidad {
+    margin-top: 35px;
+}
+
+.titulo-seccion {
+    margin-bottom: 12px;
+}
+
+.titulo-seccion h2 {
+    font-size: 29px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.titulo-seccion p {
+    margin-top: 5px;
+    color: #777;
+}
+
+
+/* TABLAS */
+
+.tabla-contenedor {
+    background-color: white;
+    border: 1px solid #d9dde2;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+.tabla-libros {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+.tabla-libros thead {
+    background-color: #eeeeee;
+}
+
+.tabla-libros th {
+    padding: 13px 12px;
+    border-right: 1px solid #d5d8db;
+    border-bottom: 1px solid #d0d4d8;
+    text-align: left;
+    font-size: 14px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.tabla-libros td {
+    padding: 13px 12px;
+    border-right: 1px solid #e0e2e4;
+    border-bottom: 1px solid #e0e2e4;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.tabla-libros tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.tabla-libros tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* TITULO DEL LIBRO */
+
+.titulo-libro {
+    font-weight: bold;
+    color: #252525;
+}
+
+
+/* GENERO */
+
+.genero {
+    background-color: #f0f1f3;
+    padding: 5px 9px;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+
+/* FAVORITOS */
+
+.favoritos {
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+
+/* ACCIONES */
+
+.acciones {
+    white-space: nowrap;
+}
+
+.btn-ver,
+.btn-editar,
+.btn-borrar {
+    display: inline-block;
+    margin-right: 8px;
+    text-decoration: underline;
+    font-size: 14px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.btn-ver {
+    color: #1769e0;
+}
+
+.btn-editar {
+    color: #198754;
+}
+
+.btn-borrar {
+    color: #dc3545;
+}
+
+.btn-ver:hover,
+.btn-editar:hover,
+.btn-borrar:hover {
+    opacity: 0.7;
+}
+
+
+/* CUANDO NO HAY LIBROS */
+
+.sin-libros {
+    text-align: center !important;
+    padding: 25px !important;
+    color: #777;
+}
+
+
+/* MENSAJES */
+
+.mensaje {
+    margin-bottom: 20px;
+}
+
+
+/* FORMULARIOS */
+
+.card {
+    border: 1px solid #d9dde2;
+    border-radius: 7px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .form-control,
 .form-select {
-    border-radius: 10px;
+    border: 1px solid #bfc3c7;
+    border-radius: 4px;
 }
 
-.form-container {
-    max-width: 800px;
-    margin: auto;
+.form-control:focus,
+.form-select:focus {
+    border-color: #1769e0;
+    box-shadow: 0 0 0 2px rgba(23, 105, 224, 0.1);
 }
 
-.book-placeholder {
-    min-height: 220px;
-    border-radius: 15px;
-    background: #dfe5ec;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 5rem;
+textarea {
+    min-height: 130px;
 }
 
-@media (max-width: 768px) {
 
-    .brand-section h1 {
-        font-size: 2.3rem;
+/* RESPONSIVE */
+
+@media (max-width: 800px) {
+
+    .bookhub-navbar .container {
+        flex-direction: column;
+        gap: 15px;
+        padding-top: 15px;
+        padding-bottom: 15px;
     }
 
+    .menu {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .titulo-pagina {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+    }
+
+    .titulo-pagina h1 {
+        font-size: 32px;
+    }
+
+}
+
+.formulario-contenedor {
+    background-color: white;
+    border: 1px solid #d9dde2;
+    border-radius: 7px;
+    padding: 30px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.formulario-contenedor h1 {
+    font-size: 32px;
+    margin-bottom: 5px;
+}
+
+.texto-formulario {
+    color: #777;
+    margin-bottom: 25px;
+}
+
+.campo {
+    margin-bottom: 18px;
+}
+
+.campo label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+.botones-formulario {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
 }

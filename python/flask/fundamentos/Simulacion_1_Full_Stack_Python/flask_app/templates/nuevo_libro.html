@@ -1,239 +1,150 @@
 {% extends "base.html" %}
 
-{% block title %}BookHub - Mis Libros{% endblock %}
+{% block contenido %}
 
-{% block content %}
+<div class="formulario-contenedor">
 
-<div class="container mt-4">
+    <h1>Agregar Nuevo Libro</h1>
+
+    <p class="texto-formulario">
+        Completa la información del libro.
+    </p>
+
+    {% with mensajes = get_flashed_messages() %}
+
+        {% for mensaje in mensajes %}
+
+            <div class="alert alert-warning">
+                {{ mensaje }}
+            </div>
+
+        {% endfor %}
+
+    {% endwith %}
 
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <form action="/libros/crear" method="POST">
 
-        <div>
+        <div class="campo">
 
-            <h1>
-                Mis Libros
-            </h1>
+            <label>Título:</label>
 
-            <p class="text-muted">
-                Libros que has publicado en BookHub.
-            </p>
+            <input
+                type="text"
+                name="titulo"
+                class="form-control"
+                minlength="2"
+                required
+            >
 
         </div>
 
-        <a href="{{ url_for('libros.nuevo') }}"
-           class="btn btn-primary">
 
-            + Nuevo Libro
+        <div class="campo">
 
-        </a>
+            <label>Autor:</label>
 
-    </div>
-
-
-    <div class="card shadow-sm mb-5">
-
-        <div class="card-body">
-
-            <h3 class="mb-3">
-                Mis Libros
-            </h3>
-
-            {% if mis_libros %}
-
-            <div class="table-responsive">
-
-                <table class="table table-bordered table-hover">
-
-                    <thead class="table-light">
-
-                        <tr>
-
-                            <th>Título</th>
-                            <th>Autor</th>
-                            <th>Género</th>
-                            <th>Fecha</th>
-                            <th>Favoritos</th>
-                            <th>Acciones</th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody>
-
-                        {% for libro in mis_libros %}
-
-                        <tr>
-
-                            <td>
-                                {{ libro.titulo }}
-                            </td>
-
-                            <td>
-                                {{ libro.autor }}
-                            </td>
-
-                            <td>
-                                {{ libro.genero }}
-                            </td>
-
-                            <td>
-                                {{ libro.fecha_publicacion }}
-                            </td>
-
-                            <td>
-                                ❤️ {{ libro.favoritos }}
-                            </td>
-
-                            <td>
-
-                                <a href="{{ url_for('libros.detalle', libro_id=libro.id) }}"
-                                   class="btn btn-sm btn-primary">
-                                    Ver
-                                </a>
-
-                                <a href="{{ url_for('libros.editar', libro_id=libro.id) }}"
-                                   class="btn btn-sm btn-warning">
-                                    Editar
-                                </a>
-
-                                <form action="{{ url_for('libros.eliminar', libro_id=libro.id) }}"
-                                      method="POST"
-                                      style="display:inline;">
-
-                                    <button type="submit"
-                                            class="btn btn-sm btn-danger"
-                                            onclick="return confirm('¿Seguro que quieres eliminar este libro?');">
-
-                                        Borrar
-
-                                    </button>
-
-                                </form>
-
-                            </td>
-
-                        </tr>
-
-                        {% endfor %}
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-            {% else %}
-
-            <div class="alert alert-info">
-
-                Todavía no tienes libros registrados.
-
-            </div>
-
-            {% endif %}
+            <input
+                type="text"
+                name="autor"
+                class="form-control"
+                minlength="2"
+                required
+            >
 
         </div>
 
-    </div>
 
+        <div class="campo">
 
+            <label>Género:</label>
 
-    <div class="card shadow-sm" id="comunidad">
+            <select
+                name="genero"
+                class="form-select"
+                required
+            >
 
-        <div class="card-body">
+                <option value="">
+                    Selecciona un género
+                </option>
 
-            <h3 class="mb-3">
-                Libros de la Comunidad
-            </h3>
+                <option value="Novela">
+                    Novela
+                </option>
 
-            <p class="text-muted">
-                Libros publicados por otros usuarios de BookHub.
-            </p>
+                <option value="Fantasía">
+                    Fantasía
+                </option>
 
+                <option value="Terror">
+                    Terror
+                </option>
 
-            {% if comunidad %}
+                <option value="Ciencia ficción">
+                    Ciencia ficción
+                </option>
 
-            <div class="table-responsive">
+                <option value="Romance">
+                    Romance
+                </option>
 
-                <table class="table table-bordered table-hover">
+                <option value="Desarrollo personal">
+                    Desarrollo personal
+                </option>
 
-                    <thead class="table-light">
-
-                        <tr>
-
-                            <th>Título</th>
-                            <th>Autor</th>
-                            <th>Género</th>
-                            <th>Publicado por</th>
-                            <th>Favoritos</th>
-                            <th>Acción</th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody>
-
-                        {% for libro in comunidad %}
-
-                        <tr>
-
-                            <td>
-                                {{ libro.titulo }}
-                            </td>
-
-                            <td>
-                                {{ libro.autor }}
-                            </td>
-
-                            <td>
-                                {{ libro.genero }}
-                            </td>
-
-                            <td>
-                                {{ libro.publicado_por }}
-                            </td>
-
-                            <td>
-                                ❤️ {{ libro.favoritos }}
-                            </td>
-
-                            <td>
-
-                                <a href="{{ url_for('libros.detalle', libro_id=libro.id) }}"
-                                   class="btn btn-sm btn-primary">
-
-                                    Ver
-
-                                </a>
-
-                            </td>
-
-                        </tr>
-
-                        {% endfor %}
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-            {% else %}
-
-            <div class="alert alert-info">
-
-                Todavía no hay libros publicados por la comunidad.
-
-            </div>
-
-            {% endif %}
+            </select>
 
         </div>
 
-    </div>
+
+        <div class="campo">
+
+            <label>Fecha de publicación:</label>
+
+            <input
+                type="date"
+                name="fecha_publicacion"
+                class="form-control"
+                required
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label>Descripción:</label>
+
+            <textarea
+                name="descripcion"
+                class="form-control"
+                minlength="10"
+                required
+            ></textarea>
+
+        </div>
+
+
+        <div class="botones-formulario">
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+            >
+                Guardar
+            </button>
+
+            <a
+                href="/libros"
+                class="btn btn-secondary"
+            >
+                Cancelar
+            </a>
+
+        </div>
+
+    </form>
 
 </div>
 

@@ -1,107 +1,90 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, session
-from flask_bcrypt import generate_password_hash, check_password_hash
+from flask import Blueprint, render_template, request, redirect, session, flash
 from flask_app.models.usuario import Usuario
-import re
+from flask_bcrypt import Bcrypt
 
 usuarios = Blueprint("usuarios", __name__)
 
-def validar_registro(form):
-    errores = []
+bcrypt = Bcrypt()
 
-    if len(form["nombre"].strip()) < 2:
-        errores.append("El nombre debe tener mínimo 2 caracteres.")
-
-    if len(form["apellido"].strip()) < 2:
-        errores.append("El apellido debe tener mínimo 2 caracteres.")
-
-    email = form["email"].strip().lower()
-
-    if not re.match(r"^[^@\s]+@[^@\s]+\.[^@\s]+$", email):
-        errores.append("Ingresa un email válido.")
-
-    if len(form["password"]) < 8:
-        errores.append("La contraseña debe tener mínimo 8 caracteres.")
-
-    if form["password"] != form["confirmar_password"]:
-        errores.append("Las contraseñas no coinciden.")
-
-    return errores
 
 @usuarios.route("/")
 def inicio():
+    return redirect("/login")
 
-    if "usuario_id" in session:
-        return redirect(url_for("libros.libros"))
-
-    return redirect(url_for("usuarios.login"))
 
 @usuarios.route("/login", methods=["GET", "POST"])
 def login():
 
-    if request.method == "POST":
+    if request.method == "GET":
+        return render_template("login.html")
 
-        email = request.form["email"].strip().lower()
-        password = request.form["password"]
+    email = request.form["email"]
+    password = request.form["password"]
 
-        usuario = Usuario.buscar_por_email(email)
+    usuario = Usuario.buscar_por_email(email)
 
-        if not usuario:
-            flash("Email o contraseña incorrectos.", "danger")
-            return redirect(url_for("usuarios.login"))
+    if usuario is None:
+        flash("Usuario no encontrado")
+        return redirect("/login")
 
-        if not check_password_hash(usuario["password"], password):
-            flash("Email o contraseña incorrectos.", "danger")
-            return redirect(url_for("usuarios.login"))
+    if not bcrypt.check_password_hash(usuario.password, password):
+        flash("Contraseña incorrecta")
+        return redirect("/login")
 
-        session["usuario_id"] = usuario["id"]
-        session["usuario_nombre"] = usuario["nombre"]
+    session["usuario_id"] = usuario.id
+    session["nombre"] = usuario.nombre
 
-        flash("Sesión iniciada correctamente.", "success")
+    return redirect("/libros")
 
-        return redirect(url_for("libros.libros"))
 
-    return render_template("login.html")
-
-@usuarios.route("/registro", methods=["POST"])
+@usuarios.route("/registro", methods=["GET", "POST"])
 def registro():
 
-    errores = validar_registro(request.form)
+    if request.method == "GET":
+        return render_template("registro.html")
 
-    email = request.form["email"].strip().lower()
+    nombre = request.form["nombre"]
+    apellido = request.form["apellido"]
+    email = request.form["email"]
+    password = request.form["password"]
 
-    if Usuario.buscar_por_email(email):
-        errores.append("El email ya está registrado.")
+    if len(nombre) < 2:
+        flash("Nombre muy corto")
+        return redirect("/registro")
 
-    if errores:
+    if len(apellido) < 2:
+        flash("Apellido muy corto")
+        return redirect("/registro")
 
-        for error in errores:
-            flash(error, "danger")
+    if len(password) < 6:
+        flash("La contraseña debe tener al menos 6 caracteres")
+        return redirect("/registro")
 
-        return redirect(url_for("usuarios.login"))
+    usuario = Usuario.buscar_por_email(email)
 
-    password_hash = generate_password_hash(
-        request.form["password"]
-    ).decode("utf-8")
+    if usuario is not None:
+        flash("Este correo ya está registrado")
+        return redirect("/registro")
 
-    Usuario.crear({
-        "nombre": request.form["nombre"].strip(),
-        "apellido": request.form["apellido"].strip(),
+    password_hash = bcrypt.generate_password_hash(password).decode("utf-8")
+
+    data = {
+        "nombre": nombre,
+        "apellido": apellido,
         "email": email,
         "password": password_hash
-    })
+    }
 
-    flash(
-        "Cuenta creada correctamente. Ahora puedes iniciar sesión.",
-        "success"
-    )
+    Usuario.crear(data)
 
-    return redirect(url_for("usuarios.login"))
+    flash("Registro exitoso. Ahora puedes iniciar sesión")
+
+    return redirect("/login")
+
 
 @usuarios.route("/logout")
 def logout():
 
     session.clear()
 
-    flash("Sesión cerrada correctamente.", "success")
-
-    return redirect(url_for("usuarios.login"))
+    return redirect("/login")
