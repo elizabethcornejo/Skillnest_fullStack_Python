@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="form-card">
+
+    <h1>
+        {{ titulo_pagina }}
+    </h1>
+
+    <form method="POST">
+
+
+        <label>
+            Título
+        </label>
+
+        <input
+            class="form-control mb-3"
+            name="titulo"
+            value="{{ tarea.get('titulo','') }}"
+            required
+        >
+
+
+        <label>
+            Categoría
+        </label>
+
+        <select
+            class="form-select mb-3"
+            name="categoria_id"
+            required
+        >
+
+            <option value="">
+                Selecciona una categoría
+            </option>
+
+            {% for categoria in categorias %}
+
+            <option
+                value="{{ categoria.id }}"
+                {% if tarea.get('categoria_id')|string == categoria.id|string %}
+                selected
+                {% endif %}
+            >
+                {{ categoria.nombre }}
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+
+        <label>
+            Prioridad
+        </label>
+
+        <select
+            class="form-select mb-3"
+            name="prioridad"
+            required
+        >
+
+            <option value="">
+                Selecciona prioridad
+            </option>
+
+            <option
+                value="Baja"
+                {% if tarea.get('prioridad') == 'Baja' %}
+                selected
+                {% endif %}
+            >
+                Baja
+            </option>
+
+            <option
+                value="Media"
+                {% if tarea.get('prioridad') == 'Media' %}
+                selected
+                {% endif %}
+            >
+                Media
+            </option>
+
+            <option
+                value="Alta"
+                {% if tarea.get('prioridad') == 'Alta' %}
+                selected
+                {% endif %}
+            >
+                Alta
+            </option>
+
+        </select>
+
+
+        <label>
+            Fecha límite
+        </label>
+
+        <input
+            class="form-control mb-3"
+            type="date"
+            name="fecha_limite"
+            value="{{ tarea.get('fecha_limite','') }}"
+            required
+        >
+
+
+        <label>
+            Descripción
+        </label>
+
+        <textarea
+            class="form-control mb-3"
+            name="descripcion"
+            rows="5"
+            required
+        >{{ tarea.get('descripcion','') }}</textarea>
+
+
+        <button class="btn btn-dark">
+            {{ boton }}
+        </button>
+
+        <a
+            href="/dashboard"
+            class="btn btn-outline-secondary"
+        >
+            Cancelar
+        </a>
+
+    </form>
+
+</div>
+
+{% endblock %}

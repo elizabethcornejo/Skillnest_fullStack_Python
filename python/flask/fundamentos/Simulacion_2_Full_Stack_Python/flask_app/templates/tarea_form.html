@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>TaskTrack - Tarea</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-dark bg-primary">
+
+    <div class="container">
+
+        <a
+            href="{{ url_for('dashboard') }}"
+            class="navbar-brand"
+        >
+            TaskTrack
+        </a>
+
+        <div>
+
+            <a
+                href="{{ url_for('dashboard') }}"
+                class="btn btn-light btn-sm"
+            >
+                Dashboard
+            </a>
+
+            <a
+                href="{{ url_for('categorias') }}"
+                class="btn btn-light btn-sm"
+            >
+                Categorías
+            </a>
+
+            <a
+                href="{{ url_for('logout') }}"
+                class="btn btn-outline-light btn-sm"
+            >
+                Cerrar sesión
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<div class="container py-5">
+
+    {% with mensajes = get_flashed_messages(with_categories=true) %}
+
+        {% if mensajes %}
+
+            {% for categoria_mensaje, mensaje in mensajes %}
+
+                <div class="alert alert-{{ categoria_mensaje }}">
+                    {{ mensaje }}
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    {% endwith %}
+
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-8">
+
+            <div class="card shadow">
+
+                <div class="card-body p-4">
+
+
+                    {% if tarea %}
+
+                        <h2 class="mb-4">
+                            Editar tarea
+                        </h2>
+
+                    {% else %}
+
+                        <h2 class="mb-4">
+                            Nueva tarea
+                        </h2>
+
+                    {% endif %}
+
+
+                    {% if tarea %}
+
+                        <form
+                            action="{{ url_for('actualizar_tarea', id=tarea.id) }}"
+                            method="POST"
+                        >
+
+                    {% else %}
+
+                        <form
+                            action="{{ url_for('crear_tarea') }}"
+                            method="POST"
+                        >
+
+                    {% endif %}
+
+
+                        <div class="mb-3">
+
+                            <label
+                                for="titulo"
+                                class="form-label"
+                            >
+                                Título
+                            </label>
+
+                            {% if tarea %}
+
+                                <input
+                                    type="text"
+                                    id="titulo"
+                                    name="titulo"
+                                    class="form-control"
+                                    value="{{ tarea.titulo }}"
+                                    required
+                                >
+
+                            {% else %}
+
+                                <input
+                                    type="text"
+                                    id="titulo"
+                                    name="titulo"
+                                    class="form-control"
+                                    required
+                                >
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="mb-3">
+
+                            <label
+                                for="categoria_id"
+                                class="form-label"
+                            >
+                                Categoría
+                            </label>
+
+                            <select
+                                id="categoria_id"
+                                name="categoria_id"
+                                class="form-select"
+                                required
+                            >
+
+                                <option value="">
+                                    Selecciona una categoría
+                                </option>
+
+
+                                {% for categoria in categorias %}
+
+                                    {% if tarea and tarea.categoria_id == categoria.id %}
+
+                                        <option
+                                            value="{{ categoria.id }}"
+                                            selected
+                                        >
+                                            {{ categoria.nombre }}
+                                        </option>
+
+                                    {% else %}
+
+                                        <option
+                                            value="{{ categoria.id }}"
+                                        >
+                                            {{ categoria.nombre }}
+                                        </option>
+
+                                    {% endif %}
+
+                                {% endfor %}
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="mb-3">
+
+                            <label
+                                for="prioridad"
+                                class="form-label"
+                            >
+                                Prioridad
+                            </label>
+
+                            <select
+                                id="prioridad"
+                                name="prioridad"
+                                class="form-select"
+                                required
+                            >
+
+                                {% if tarea and tarea.prioridad == "Alta" %}
+
+                                    <option
+                                        value="Alta"
+                                        selected
+                                    >
+                                        Alta
+                                    </option>
+
+                                {% else %}
+
+                                    <option value="Alta">
+                                        Alta
+                                    </option>
+
+                                {% endif %}
+
+
+                                {% if tarea and tarea.prioridad == "Media" %}
+
+                                    <option
+                                        value="Media"
+                                        selected
+                                    >
+                                        Media
+                                    </option>
+
+                                {% else %}
+
+                                    <option value="Media">
+                                        Media
+                                    </option>
+
+                                {% endif %}
+
+
+                                {% if tarea and tarea.prioridad == "Baja" %}
+
+                                    <option
+                                        value="Baja"
+                                        selected
+                                    >
+                                        Baja
+                                    </option>
+
+                                {% else %}
+
+                                    <option value="Baja">
+                                        Baja
+                                    </option>
+
+                                {% endif %}
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="mb-3">
+
+                            <label
+                                for="fecha_limite"
+                                class="form-label"
+                            >
+                                Fecha límite
+                            </label>
+
+                            {% if tarea %}
+
+                                <input
+                                    type="date"
+                                    id="fecha_limite"
+                                    name="fecha_limite"
+                                    class="form-control"
+                                    value="{{ tarea.fecha_limite }}"
+                                    required
+                                >
+
+                            {% else %}
+
+                                <input
+                                    type="date"
+                                    id="fecha_limite"
+                                    name="fecha_limite"
+                                    class="form-control"
+                                    required
+                                >
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="mb-3">
+
+                            <label
+                                for="estado"
+                                class="form-label"
+                            >
+                                Estado
+                            </label>
+
+                            <select
+                                id="estado"
+                                name="estado"
+                                class="form-select"
+                                required
+                            >
+
+                                {% if tarea and tarea.estado == "Pendiente" %}
+
+                                    <option
+                                        value="Pendiente"
+                                        selected
+                                    >
+                                        Pendiente
+                                    </option>
+
+                                {% elif not tarea %}
+
+                                    <option
+                                        value="Pendiente"
+                                        selected
+                                    >
+                                        Pendiente
+                                    </option>
+
+                                {% else %}
+
+                                    <option value="Pendiente">
+                                        Pendiente
+                                    </option>
+
+                                {% endif %}
+
+
+                                {% if tarea and tarea.estado == "En progreso" %}
+
+                                    <option
+                                        value="En progreso"
+                                        selected
+                                    >
+                                        En progreso
+                                    </option>
+
+                                {% else %}
+
+                                    <option value="En progreso">
+                                        En progreso
+                                    </option>
+
+                                {% endif %}
+
+
+                                {% if tarea and tarea.estado == "Completada" %}
+
+                                    <option
+                                        value="Completada"
+                                        selected
+                                    >
+                                        Completada
+                                    </option>
+
+                                {% else %}
+
+                                    <option value="Completada">
+                                        Completada
+                                    </option>
+
+                                {% endif %}
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="mb-4">
+
+                            <label
+                                for="descripcion"
+                                class="form-label"
+                            >
+                                Descripción
+                            </label>
+
+                            {% if tarea %}
+
+                                <textarea
+                                    id="descripcion"
+                                    name="descripcion"
+                                    class="form-control"
+                                    rows="5"
+                                    required
+                                >{{ tarea.descripcion }}</textarea>
+
+                            {% else %}
+
+                                <textarea
+                                    id="descripcion"
+                                    name="descripcion"
+                                    class="form-control"
+                                    rows="5"
+                                    required
+                                ></textarea>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="d-flex gap-2">
+
+                            <button
+                                type="submit"
+                                class="btn btn-primary"
+                            >
+
+                                {% if tarea %}
+                                    Actualizar tarea
+                                {% else %}
+                                    Crear tarea
+                                {% endif %}
+
+                            </button>
+
+
+                            <a
+                                href="{{ url_for('dashboard') }}"
+                                class="btn btn-secondary"
+                            >
+                                Cancelar
+                            </a>
+
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
