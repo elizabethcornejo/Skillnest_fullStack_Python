@@ -1,0 +1,28 @@
+DROP DATABASE IF EXISTS familia_peluche;
+CREATE DATABASE familia_peluche;
+USE familia_peluche;
+
+CREATE TABLE usuarios(
+	id_usuario INT PRIMARY KEY AUTO_INCREMENT,
+	nombre     VARCHAR(60) NOT NULL,
+	apellido   VARCHAR(200) NOT NULL,
+    email      VARCHAR(200) NOT NULL UNIQUE,
+    contrasena VARCHAR(225) NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE peluches(
+	id_peluche   INT PRIMARY KEY AUTO_INCREMENT,
+    nombre       VARCHAR(60) NOT NULL,
+    descripcion  VARCHAR(250) NOT NULL,
+    visitas      INT NOT NULL DEFAULT 0,
+    donador_id   INT,
+    FOREIGN KEY (donador_id) REFERENCES usuarios(id_usuario)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    adoptador_id INT,
+    FOREIGN KEY (adoptador_id) REFERENCES usuarios(id_usuario)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
