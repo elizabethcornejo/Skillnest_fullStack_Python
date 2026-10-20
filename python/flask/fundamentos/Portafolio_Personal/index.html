@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="elizabethcornejo@liceovvh.cl">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portafolio</title>
+<meta name="description" content="Portafolio de Elizabeth, desarrollador/a web en formación.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="wrap">
+    <aside>
+    <h1>Elizabeth Cornejo Romo</h1>
+    <p>Desarrollador/a web en formación. Santiago, Chile.</p>
+    <nav aria-label="Secciones" id="nav">
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#tecnologias">Tecnologías</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#extra">Otros trabajos</a>
+        <a href="#video">Video</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+    <button class="btn" id="theme" type="button">Cambiar tema</button>
+    </aside>
+
+    <main>
+    <section id="sobre-mi">
+        <pre class="code mono"><span class="k">const</span> yo = {
+    nombre: <span class="s">"Tu Nombre"</span>,
+    perfil: <span class="s">"Desarrollador/a frontend"</span>,
+    aprendiendo: [<span class="s">"HTML"</span>, <span class="s">"CSS"</span>, <span class="s">"JavaScript"</span>],
+    intereses: <span class="s">"interfaces accesibles y apps web"</span>,
+};</pre>
+        <p></p>
+    </section>
+
+    <section id="tecnologias">
+        <h2>Tecnologías y habilidades</h2>
+        <p class="muted">Toca una tecnología para ver qué he hecho con ella.</p>
+        <div class="chips" id="techs"></div>
+        <p class="detail" id="tech-detail" aria-live="polite">Selecciona una tecnología.</p>
+    </section>
+
+    <section id="proyectos">
+        <h2>Proyectos</h2>
+        <div class="filters" id="filters" role="group" aria-label="Filtrar proyectos por tecnología"></div>
+        <div class="grid" id="grid"></div>
+    </section>
+
+    <section id="extra">
+        <h2>Tareas y trabajos adicionales</h2>
+        <ul class="extra">
+        <li><strong>Ejercicio de Git:</strong> ramas, merge y resolución de conflictos. <a href="#">Ver repositorio</a></li>
+        <li><strong>Reto de JavaScript:</strong> manipulación del DOM con una lista de tareas. <a href="#">Ver repositorio</a></li>
+        <li><strong>Maquetación responsiva:</strong> página basada en un diseño de Figma. <a href="#">Ver repositorio</a></li>
+        </ul>
+    </section>
+
+    <section id="video">
+        <h2>Video de presentación</h2>
+        <video controls preload="metadata" poster="img/poster.jpg">
+        <source src="media/presentacion.mp4" type="video/mp4">
+        Tu navegador no puede reproducir este video.
+        </video>
+        <p class="muted">En este video me presento y muestro cómo construí uno de mis proyectos.</p>
+    </section>
+
+    <section id="contacto">
+        <h2>Contacto</h2>
+        <p>Correo: <a href="mailto:elizabethcornejo@liceovvh.cl">elizabethcornejo@liceovvh.cl</a></p>
+        <p class="links"><a href="https://www.linkedin.com/in/tu-perfil" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/tu-usuario" target="_blank" rel="noopener">GitHub</a></p>
+        <form id="form" novalidate>
+        <label for="nombre">Tu nombre</label>
+        <input id="nombre" required autocomplete="name">
+        <label for="msg">Mensaje</label>
+        <textarea id="msg" rows="4" required></textarea>
+        <p class="error" id="error" role="alert"></p>
+        <button class="btn" type="submit">Enviar por correo</button>
+        </form>
+    </section>
+    <footer class="muted">© <span id="year"></span> Tu Nombre</footer>
+    </main>
+</div>
+
+<dialog id="modal" aria-labelledby="m-title">
+    <button class="btn close" id="close" type="button">Cerrar</button>
+    <h3 id="m-title"></h3>
+    <p id="m-desc"></p>
+    <ul class="tags mono" id="m-tags"></ul>
+    <p class="links" id="m-links"></p>
+</dialog>
+<script src="static/js/script.js"></script>
+</body>
+</html>
