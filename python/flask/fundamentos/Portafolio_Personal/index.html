@@ -1,98 +1,522 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="utf-8">
-<meta name="author" content="elizabethcornejo@liceovvh.cl">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Portafolio</title>
-<meta name="description" content="Portafolio de Elizabeth, desarrollador/a web en formación.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="static/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elizabeth Cornejo | Full Stack Developer & Tech Specialist</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <!-- Fuentes Premium: Syne & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@700;800&display=swap"
+        rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
+
 <body>
-<div class="progress" id="progress" aria-hidden="true"></div>
-<div class="wrap">
-    <aside>
-    <h1>Elizabeth Cornejo Romo</h1>
-    <p>Desarrollador/a web en formación. Santiago, Chile.</p>
-    <nav aria-label="Secciones" id="nav">
-        <a href="#sobre-mi">Sobre mí</a>
-        <a href="#tecnologias">Tecnologías</a>
-        <a href="#proyectos">Proyectos</a>
-        <a href="#extra">Otros trabajos</a>
-        <a href="#video">Video</a>
-        <a href="#contacto">Contacto</a>
-    </nav>
-    <button class="btn" id="theme" type="button">Cambiar tema</button>
-    </aside>
+
+    <!-- Fondo dinámico con orbes de gradiente -->
+    <div class="gradient-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Header / Navbar -->
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo">Te<span>té</span></a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#sobre-mi">Inicio</a></li>
+                <li><a href="#proceso">Proceso</a></li>
+                <li><a href="#proyectos">Trabajos</a></li>
+                <li><a href="#tecnologias">Tecnologías</a></li>
+                <li><a href="#idiomas">Idiomas</a></li>
+                <li><a href="#formacion">Formación</a></li>
+                <li><a href="#experiencia">Trayectoria</a></li>
+            </ul>
+            <a href="#contacto" class="btn-nav">Contacto <i data-lucide="arrow-up-right"></i></a>
+            <button class="hamburger" id="hamburger" aria-label="Menú">
+                <i data-lucide="menu"></i>
+            </button>
+        </nav>
+    </header>
 
     <main>
-    <section id="sobre-mi">
-        <pre class="code mono"><span class="k">const</span> yo = {
-    nombre: <span class="s">"Tu Nombre"</span>,
-    perfil: <span class="s">"Desarrollador/a frontend"</span>,
-    aprendiendo: [<span class="s">"HTML"</span>, <span class="s">"CSS"</span>, <span class="s">"JavaScript"</span>],
-    intereses: <span class="s">"interfaces accesibles y apps web"</span>,
-};</pre>
-        <p></p>
-    </section>
+        <!-- HERO SECTION -->
+        <section id="sobre-mi" class="hero-section">
+            <div class="container hero-grid">
+                <div class="hero-main-card tilt-card">
+                    <div class="hero-header-badge">
+                        <span class="status-dot"></span> Disponible para Práctica Profesional
+                    </div>
+                    <span class="sub-orange">Hey, soy</span>
+                    <h1 class="hero-title">Elizabeth Cornejo</h1>
+                    <p class="hero-text-lg">
+                        Desarrolladora Full Stack Python & Técnico en Programación[cite: 1]. Especializada en
+                        arquitectura web, lógica de negocio en backend, bases de datos relacionales y desarrollo
+                        interactivo con HTML, CSS y JavaScript[cite: 1].
+                    </p>
 
-    <section id="tecnologias">
-        <h2>Tecnologías y habilidades</h2>
-        <p class="muted">Toca una tecnología para ver qué he hecho con ella.</p>
-        <div class="chips" id="techs"></div>
-        <p class="detail" id="tech-detail" aria-live="polite">Selecciona una tecnología.</p>
-    </section>
+                    <div class="hero-metrics">
+                        <div class="metric-item">
+                            <span class="metric-number" data-target="4">0</span>
+                            <span class="metric-label">Años de Especialidad</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-number" data-target="10">0</span><span class="plus">+</span>
+                            <span class="metric-label">Proyectos & Módulos</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-number" data-target="100">0</span><span class="percent">%</span>
+                            <span class="metric-label">Compromiso Técnico</span>
+                        </div>
+                    </div>
 
-    <section id="proyectos">
-        <h2>Proyectos</h2>
-        <div class="filters" id="filters" role="group" aria-label="Filtrar proyectos por tecnología"></div>
-        <div class="grid" id="grid"></div>
-    </section>
+                    <div class="hero-pills">
+                        <span>#01 Python Full Stack</span>
+                        <span>#02 HTML5 / CSS3 / JS</span>
+                        <span>#03 SQL Relacional</span>
+                        <span>#04 Soporte & Redes</span>
+                    </div>
+                </div>
 
-    <section id="extra">
-        <h2>Tareas y trabajos adicionales</h2>
-        <ul class="extra">
-        <li><strong>Ejercicio de Git:</strong> ramas, merge y resolución de conflictos. <a href="#">Ver repositorio</a></li>
-        <li><strong>Reto de JavaScript:</strong> manipulación del DOM con una lista de tareas. <a href="#">Ver repositorio</a></li>
-        <li><strong>Maquetación responsiva:</strong> página basada en un diseño de Figma. <a href="#">Ver repositorio</a></li>
-        </ul>
-    </section>
+                <div class="hero-visual-card tilt-card">
+                    <div class="visual-overlay">
+                        <span class="tag-floating">Full Stack Developer</span>
+                    </div>
+                    <!-- REEMPLAZA AQUÍ TU IMAGEN DE PERFIL -->
+                    <img src="https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?auto=format&fit=crop&w=800&q=80"
+                        alt="Elizabeth Cornejo" class="hero-img">
+                </div>
+            </div>
+        </section>
 
-    <section id="video">
-        <h2>Video de presentación</h2>
-        <video controls preload="metadata" poster="img/poster.jpg">
-        <source src="media/presentacion.mp4" type="video/mp4">
-        Tu navegador no puede reproducir este video.
-        </video>
-        <p class="muted">En este video me presento y muestro cómo construí uno de mis proyectos.</p>
-    </section>
+        <!-- PROCESO CREATIVO / BEHIND THE CODE -->
+        <section id="proceso" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="sub-orange">Behind the Code</span>
+                    <h2>Cómo construyo soluciones digitales</h2>
+                </div>
+                <div class="process-grid">
+                    <div class="process-card tilt-card">
+                        <span class="step-num">01</span>
+                        <h3>Análisis & Arquitectura</h3>
+                        <p>Diseño conceptual de la aplicación, modelado de diagramas entidad-relación (ER) y definición
+                            de requerimientos del usuario[cite: 1].</p>
+                    </div>
+                    <div class="process-card tilt-card">
+                        <span class="step-num">02</span>
+                        <h3>Desarrollo Frontend & Backend</h3>
+                        <p>Implementación de interfaces en HTML/CSS/JS estructuradas y vinculadas con lógica potente en
+                            Python y SQL[cite: 1].</p>
+                    </div>
+                    <div class="process-card tilt-card">
+                        <span class="step-num">03</span>
+                        <h3>Pruebas & Optimización</h3>
+                        <p>Verificación de consultas, diagnóstico de bugs, ensamblado e integración en entornos de red
+                            seguros[cite: 1].</p>
+                    </div>
+                    <div class="process-card tilt-card">
+                        <span class="step-num">04</span>
+                        <h3>Despliegue & Documentación</h3>
+                        <p>Publicación mediante control de versiones en GitHub Pages y entrega de soporte técnico con
+                            manual de uso[cite: 1].</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <section id="contacto">
-        <h2>Contacto</h2>
-        <p>Correo: <a href="mailto:elizabethcornejo@liceovvh.cl">elizabethcornejo@liceovvh.cl</a></p>
-        <p class="links"><a href="https://www.linkedin.com/in/tu-perfil" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/tu-usuario" target="_blank" rel="noopener">GitHub</a></p>
-        <form id="form" novalidate>
-        <label for="nombre">Tu nombre</label>
-        <input id="nombre" required autocomplete="name">
-        <label for="msg">Mensaje</label>
-        <textarea id="msg" rows="4" required></textarea>
-        <p class="error" id="error" role="alert"></p>
-        <button class="btn" type="submit">Enviar por correo</button>
-        </form>
-    </section>
-    <footer class="muted">© <span id="year"></span> Tu Nombre</footer>
+        <!-- PROYECTOS SELECCIONADOS -->
+        <section id="proyectos" class="section">
+            <div class="container">
+                <div class="section-header flex-header">
+                    <div>
+                        <span class="sub-orange">Selected Work</span>
+                        <h2>Proyectos & Trabajos Destacados</h2>
+                    </div>
+                    <div class="filter-pills">
+                        <button class="pill active" data-filter="todos">Todos</button>
+                        <button class="pill" data-filter="destacados">Destacados</button>
+                        <button class="pill" data-filter="software">Software & BD</button>
+                        <button class="pill" data-filter="redes">Soporte & Redes</button>
+                    </div>
+                </div>
+
+                <div class="projects-grid">
+                    <!-- Proyecto 1 -->
+                    <article class="project-card tilt-card" data-category="destacados">
+                        <div class="project-img-wrapper">
+                            <!-- REEMPLAZA AQUÍ LA IMAGEN DEL PROYECTO 1 -->
+                            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80"
+                                alt="Escáner de Hardware">
+                            <span class="category-badge">Feria TP · Líder</span>
+                        </div>
+                        <div class="project-info">
+                            <h3>App Escáner Interactivo de Hardware</h3>
+                            <p>Liderazgo de equipo en el desarrollo de software interactivo para escaneo y visualización
+                                instantánea de especificaciones técnicas de componentes de hardware[cite: 1].</p>
+                            <div class="tech-tags">
+                                <span>Python</span><span>Hardware</span><span>Escáner</span><span>Liderazgo</span>
+                            </div>
+                            <a href="https://github.com/tu-usuario/escaner-hardware" target="_blank"
+                                class="btn-circle-link"><i data-lucide="arrow-up-right"></i></a>
+                        </div>
+                    </article>
+
+                    <!-- Proyecto 2 -->
+                    <article class="project-card tilt-card" data-category="software">
+                        <div class="project-img-wrapper">
+                            <!-- REEMPLAZA AQUÍ LA IMAGEN DEL PROYECTO 2 -->
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80"
+                                alt="Aplicación Web con BD">
+                            <span class="category-badge">Full Stack</span>
+                        </div>
+                        <div class="project-info">
+                            <h3>Solución Web con Base de Datos SQL</h3>
+                            <p>Desarrollo de una plataforma web funcional que integra un modelo relacional de datos,
+                                ejecución de consultas SQL complejas e interfaz adaptativa[cite: 1].</p>
+                            <div class="tech-tags">
+                                <span>HTML/CSS</span><span>JavaScript</span><span>Python</span><span>SQL</span>
+                            </div>
+                            <a href="https://github.com/tu-usuario/web-bd" target="_blank" class="btn-circle-link"><i
+                                    data-lucide="arrow-up-right"></i></a>
+                        </div>
+                    </article>
+
+                    <!-- Proyecto 3 -->
+                    <article class="project-card tilt-card" data-category="redes">
+                        <div class="project-img-wrapper">
+                            <!-- REEMPLAZA AQUÍ LA IMAGEN DEL PROYECTO 3 -->
+                            <img src="https://images.unsplash.com/photo-1588508065123-287b28e013da?auto=format&fit=crop&w=800&q=80"
+                                alt="Configuración de Redes">
+                            <span class="category-badge">Infraestructura</span>
+                        </div>
+                        <div class="project-info">
+                            <h3>Configuración de Laboratorio y Redes LAN</h3>
+                            <p>Ensamblado de hardware, mantenimiento preventivo, instalación de sistemas operativos
+                                (Windows/Linux) y montaje de redes locales LAN[cite: 1].</p>
+                            <div class="tech-tags">
+                                <span>Redes LAN</span><span>Windows</span><span>Linux</span><span>Soporte</span>
+                            </div>
+                            <a href="https://github.com/tu-usuario/lab-config" target="_blank"
+                                class="btn-circle-link"><i data-lucide="arrow-up-right"></i></a>
+                        </div>
+                    </article>
+
+                    <!-- Proyecto 4 -->
+                    <article class="project-card tilt-card" data-category="software">
+                        <div class="project-img-wrapper">
+                            <!-- REEMPLAZA AQUÍ LA IMAGEN DEL PROYECTO 4 -->
+                            <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80"
+                                alt="Sistema de Gestión POO">
+                            <span class="category-badge">POO & Python</span>
+                        </div>
+                        <div class="project-info">
+                            <h3>Sistema de Gestión bajo Paradigma POO</h3>
+                            <p>Aplicación orientada a objetos construida para simular el control de inventario y datos
+                                con encapsulamiento y modularidad[cite: 1].</p>
+                            <div class="tech-tags">
+                                <span>Python POO</span><span>Lógica</span><span>Git</span>
+                            </div>
+                            <a href="https://github.com/tu-usuario/sistema-poo" target="_blank"
+                                class="btn-circle-link"><i data-lucide="arrow-up-right"></i></a>
+                        </div>
+                    </article>
+
+                    <!-- Proyecto 5 -->
+                    <article class="project-card tilt-card" data-category="destacados">
+                        <div class="project-img-wrapper">
+                            <!-- REEMPLAZA AQUÍ LA IMAGEN DEL PROYECTO 5 -->
+                            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80"
+                                alt="Panel Interactivo">
+                            <span class="category-badge">UI & DOM</span>
+                        </div>
+                        <div class="project-info">
+                            <h3>Panel Interactivo de Soporte a Usuarios</h3>
+                            <p>Interfaz dinámica en JavaScript para la recepción, filtrado y resolución de tickets
+                                técnicos e incidencias informáticas[cite: 1].</p>
+                            <div class="tech-tags">
+                                <span>JavaScript</span><span>Eventos DOM</span><span>UI Design</span>
+                            </div>
+                            <a href="https://github.com/tu-usuario/panel-tickets" target="_blank"
+                                class="btn-circle-link"><i data-lucide="arrow-up-right"></i></a>
+                        </div>
+                    </article>
+
+                    <!-- Proyecto 6 -->
+                    <article class="project-card tilt-card" data-category="redes">
+                        <div class="project-img-wrapper">
+                            <!-- REEMPLAZA AQUÍ LA IMAGEN DEL PROYECTO 6 -->
+                            <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80"
+                                alt="Soporte Técnico">
+                            <span class="category-badge">Mantenimiento</span>
+                        </div>
+                        <div class="project-info">
+                            <h3>Diagnóstico y Mantenimiento Correctivo</h3>
+                            <p>Protocolos de soporte presencial, cambio de componentes críticos, respaldo de datos y
+                                optimización de rendimiento operativo[cite: 1].</p>
+                            <div class="tech-tags">
+                                <span>Mantenimiento</span><span>Sistemas Operativos</span>
+                            </div>
+                            <a href="https://github.com/tu-usuario/soporte-tecnico" target="_blank"
+                                class="btn-circle-link"><i data-lucide="arrow-up-right"></i></a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- TECNOLOGÍAS Y LENGUAJES (BENTO GRID CON IMÁGENES/ILUSTRACIONES) -->
+        <section id="tecnologias" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="sub-orange">Stack Tecnológico</span>
+                    <h2>Lenguajes & Herramientas de Desarrollo</h2>
+                </div>
+
+                <div class="tech-stack-grid">
+                    <!-- Python Card -->
+                    <div class="tech-card tilt-card">
+                        <div class="tech-card-header">
+                            <div class="icon-orange-box"><i data-lucide="terminal"></i></div>
+                            <span class="tech-level">Backend Lead</span>
+                        </div>
+                        <h3>Python & POO</h3>
+                        <p>Construcción de lógica de negocio, estructuras orientadas a objetos, scripts de
+                            automatización y gestión de datos[cite: 1].</p>
+                        <div class="tech-img-box">
+                            <!-- REEMPLAZA AQUÍ LA IMAGEN DE PYTHON -->
+                            <img src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935?auto=format&fit=crop&w=600&q=80"
+                                alt="Python Coding">
+                        </div>
+                    </div>
+
+                    <!-- Frontend Trio Card -->
+                    <div class="tech-card tilt-card">
+                        <div class="tech-card-header">
+                            <div class="icon-orange-box"><i data-lucide="code-2"></i></div>
+                            <span class="tech-level">Frontend Web</span>
+                        </div>
+                        <h3>HTML5 · CSS3 · JavaScript</h3>
+                        <p>Maquetación semántica adaptativa, manipulación interactiva del DOM, animaciones de interfaz y
+                            diseño UI responsivo[cite: 1].</p>
+                        <div class="tech-img-box">
+                            <!-- REEMPLAZA AQUÍ LA IMAGEN DE HTML/CSS/JS -->
+                            <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80"
+                                alt="Frontend Development">
+                        </div>
+                    </div>
+
+                    <!-- SQL & Databases -->
+                    <div class="tech-card tilt-card">
+                        <div class="tech-card-header">
+                            <div class="icon-orange-box"><i data-lucide="database"></i></div>
+                            <span class="tech-level">Bases de Datos</span>
+                        </div>
+                        <h3>SQL & Modelos Relacionales</h3>
+                        <p>Diseño conceptual y físico de diagramas ER, consultas relacionales complejas, vistas y
+                            respaldos[cite: 1].</p>
+                        <div class="tech-img-box">
+                            <!-- REEMPLAZA AQUÍ LA IMAGEN DE BASES DE DATOS -->
+                            <img src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=600&q=80"
+                                alt="Database Management">
+                        </div>
+                    </div>
+
+                    <!-- Git & Infrastructure -->
+                    <div class="tech-card tilt-card">
+                        <div class="tech-card-header">
+                            <div class="icon-orange-box"><i data-lucide="git-branch"></i></div>
+                            <span class="tech-level">Control & Redes</span>
+                        </div>
+                        <h3>Git, GitHub & Redes LAN</h3>
+                        <p>Control de versiones para trabajo colaborativo, publicación continua y configuración de
+                            sistemas Windows/Linux[cite: 1].</p>
+                        <div class="tech-img-box">
+                            <!-- REEMPLAZA AQUÍ LA IMAGEN DE GIT Y REDES -->
+                            <img src="https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=600&q=80"
+                                alt="Git and Infrastructure">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- IDIOMAS Y COMUNICACIÓN -->
+        <section id="idiomas" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="sub-orange">Global Mindset</span>
+                    <h2>Idiomas & Competencias de Comunicación</h2>
+                </div>
+
+                <div class="languages-grid">
+                    <div class="lang-card tilt-card">
+                        <div class="lang-header">
+                            <div class="lang-flag"><i data-lucide="globe-2"></i></div>
+                            <div>
+                                <h3>Español</h3>
+                                <span class="lang-status">Nativo / Lengua Materna</span>
+                            </div>
+                        </div>
+                        <p>Dominio fluido profesional para liderazgo de equipos, atención al público y documentación
+                            técnica de proyectos[cite: 1].</p>
+                        <div class="progress-bar-wrapper">
+                            <div class="progress-bar-fill" style="width: 100%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="lang-card tilt-card">
+                        <div class="lang-header">
+                            <div class="lang-flag"><i data-lucide="languages"></i></div>
+                            <div>
+                                <h3>Inglés</h3>
+                                <span class="lang-status">Técnico / Lectura Académica</span>
+                            </div>
+                        </div>
+                        <p>Comprensión de documentación de código, lectura de manuales de desarrollo, uso de sintaxis en
+                            Python/JS y aprendizaje continuo.</p>
+                        <div class="progress-bar-wrapper">
+                            <div class="progress-bar-fill" style="width: 70%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FORMACIÓN ACADÉMICA -->
+        <section id="formacion" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="sub-orange">Educación & Especialidad</span>
+                    <h2>Formación Académica</h2>
+                </div>
+
+                <div class="edu-bento-card tilt-card">
+                    <div class="edu-header flex-header">
+                        <div>
+                            <h3>Liceo Comercial Vate Vicente Huidobro</h3>
+                            <p class="edu-location"><i data-lucide="map-pin"></i> San Ramón, Santiago, Chile | (2023 -
+                                2026)</p>[cite: 1]
+                        </div>
+                        <span class="status-badge">Egresada de 4° Medio — Práctica Profesional</span>[cite: 1]
+                    </div>
+
+                    <div class="modules-grid">
+                        <div class="module-box">
+                            <h4><i data-lucide="terminal"></i> Módulos 3° Medio</h4>
+                            <ul>
+                                <li>Programación y Bases de Datos[cite: 1]</li>
+                                <li>Instalación y Configuración de Equipos[cite: 1]</li>
+                                <li>Soporte a Usuarios y Productividad[cite: 1]</li>
+                                <li>Sistemas Operativos y Redes LAN[cite: 1]</li>
+                            </ul>
+                        </div>
+                        <div class="module-box highlight-box">
+                            <h4><i data-lucide="code-2"></i> Módulos 4° Medio</h4>
+                            <ul>
+                                <li>Programación Orientada a Objetos (POO)[cite: 1]</li>
+                                <li>Desarrollo de Aplicaciones Web[cite: 1]</li>
+                                <li>Diseño de Bases de Datos Relacionales[cite: 1]</li>
+                                <li>Administración de Bases de Datos[cite: 1]</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRAYECTORIA LABORAL Y PROYECTOS DESTACADOS -->
+        <section id="experiencia" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="sub-orange">Experiencia</span>
+                    <h2>Trayectoria & Trabajo en Equipo</h2>
+                </div>
+
+                <div class="exp-grid">
+                    <!-- Experiencia 1: Líder de Proyecto en Feria TP -->
+                    <div class="exp-card tilt-card">
+                        <div class="exp-icon"><i data-lucide="award"></i></div>
+                        <h3>Líder de Proyecto en Feria Técnico-Profesional</h3>
+                        <span class="exp-sub">3° Medio — Liceo Comercial Vate Vicente Huidobro</span>
+                        <p>Liderazgo y coordinación de un equipo de trabajo en el desarrollo de un software interactivo
+                            con escáner, diseñado para reconocer componentes de hardware e información técnica
+                            automáticamente[cite: 1].</p>
+                    </div>
+
+                    <!-- Experiencia 2: Atención al Cliente -->
+                    <div class="exp-card tilt-card">
+                        <div class="exp-icon"><i data-lucide="shopping-bag"></i></div>
+                        <h3>Atención al Cliente y Ventas</h3>
+                        <span class="exp-sub">Stand de Alimentos, Persa Lo Espejo</span>[cite: 1]
+                        <p>Atención directa al público, trabajo bajo presión y manejo responsable, limpio y ordenado del
+                            espacio de trabajo[cite: 1].</p>
+                    </div>
+
+                    <!-- Experiencia 3: Promotora y Difusión -->
+                    <div class="exp-card tilt-card">
+                        <div class="exp-icon"><i data-lucide="megaphone"></i></div>
+                        <h3>Promotora y Difusión</h3>
+                        <span class="exp-sub">Salón de Belleza Relmu Estudio (San Miguel)</span>[cite: 1]
+                        <p>Reparto de volanteo, captación asertiva de clientes y comunicación clara de servicios[cite:
+                            1].</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIDEO DE PRESENTACIÓN -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="sub-orange">Media</span>
+                    <h2>Video de Presentación</h2>
+                </div>
+                <div class="video-card-container tilt-card">
+                    <iframe src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" title="Video de presentación"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACTO HERO -->
+        <section id="contacto" class="section">
+            <div class="container">
+                <div class="contact-hero-card">
+                    <span class="sub-orange">Let's Connect</span>
+                    <h2>¿Iniciamos un proyecto o Práctica Profesional juntos?</h2>
+                    <p>Puedes escribirme directamente a mi correo electrónico profesional para coordinar una entrevista
+                        o propuesta laboral[cite: 1].</p>
+
+                    <div class="contact-btn-group">
+                        <a href="mailto:tete.eccr@gmail.com" class="btn-orange-lg"><i data-lucide="mail"></i>
+                            tete.eccr@gmail.com</a>[cite: 1]
+                        <a href="https://linkedin.com/in/tu-perfil" target="_blank" class="btn-dark-lg"><i
+                                data-lucide="linkedin"></i> Mi LinkedIn</a>[cite: 1]
+                        <a href="https://github.com/tu-usuario" target="_blank" class="btn-dark-lg"><i
+                                data-lucide="github"></i> Mi GitHub</a>[cite: 1]
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
-</div>
 
-<dialog id="modal" aria-labelledby="m-title">
-    <button class="btn close" id="close" type="button">Cerrar</button>
-    <h3 id="m-title"></h3>
-    <p id="m-desc"></p>
-    <ul class="tags mono" id="m-tags"></ul>
-    <p class="links" id="m-links"></p>
-</dialog>
-<script src="static/js/script.js"></script>
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2026 Elizabeth Carolina Cornejo Romo[cite: 1]. Diseñado con estilo Folioblox Premium.</p>
+        </div>
+    </footer>
+
+    <script src="static/js/script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
+
 </html>
