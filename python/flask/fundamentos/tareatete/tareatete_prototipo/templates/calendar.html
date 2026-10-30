@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+
+Calendario · SchoolNest
+
+{% endblock %}
+
+
+{% block head %}
+
+<script
+    src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js">
+</script>
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="page-heading">
+
+
+    <div>
+
+
+        <span class="eyebrow">
+
+            Agenda comunitaria
+
+        </span>
+
+
+        <h1>
+
+            Calendario escolar
+
+        </h1>
+
+
+        <p>
+
+            Consulta eventos, ventas y alimentación
+            desde una sola agenda.
+
+        </p>
+
+
+    </div>
+
+
+    <div class="calendar-legend">
+
+
+        <span>
+
+            <i class="legend-dot blue"></i>
+
+            Eventos
+
+        </span>
+
+
+        <span>
+
+            <i class="legend-dot green"></i>
+
+            Ventas
+
+        </span>
+
+
+        <span>
+
+            <i class="legend-dot yellow"></i>
+
+            Menú
+
+        </span>
+
+
+    </div>
+
+
+</section>
+
+
+
+<section class="calendar-toolbar">
+
+
+    <div class="filter-tabs">
+
+
+        <button
+            class="filter-tab active"
+            data-calendar-filter="all"
+        >
+
+            Todos
+
+        </button>
+
+
+        <button
+            class="filter-tab"
+            data-calendar-filter="events"
+        >
+
+            Eventos
+
+        </button>
+
+
+        <button
+            class="filter-tab"
+            data-calendar-filter="sales"
+        >
+
+            Ventas
+
+        </button>
+
+
+        <button
+            class="filter-tab"
+            data-calendar-filter="menu"
+        >
+
+            Menú
+
+        </button>
+
+
+    </div>
+
+
+</section>
+
+
+
+<section class="calendar-layout">
+
+
+    <div class="content-card calendar-card">
+
+        <div id="calendar"></div>
+
+    </div>
+
+
+
+    <aside class="content-card calendar-detail-card">
+
+
+        <div class="detail-placeholder-icon">
+
+            <i data-lucide="calendar-search"></i>
+
+        </div>
+
+
+        <span class="eyebrow">
+
+            Detalle
+
+        </span>
+
+
+        <h2 id="detailTitle">
+
+            Selecciona una actividad
+
+        </h2>
+
+
+        <p id="detailDescription">
+
+            Haz clic sobre un evento, una venta
+            o el menú para revisar su información.
+
+        </p>
+
+
+        <div
+            class="detail-information"
+            id="detailMeta"
+        ></div>
+
+
+    </aside>
+
+
+</section>
+
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script
+    src="{{ url_for('static', filename='js/calendar.js') }}">
+</script>
+
+{% endblock %}

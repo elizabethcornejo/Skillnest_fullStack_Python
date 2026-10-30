@@ -1,0 +1,381 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+
+Menú escolar · SchoolNest
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="page-heading page-heading-actions">
+
+
+    <div>
+
+        <span class="eyebrow">
+
+            Alimentación
+
+        </span>
+
+        <h1>
+
+            Menú escolar
+
+        </h1>
+
+        <p>
+
+            Consulta el desayuno y almuerzo
+            de cada jornada.
+
+        </p>
+
+    </div>
+
+
+    {% if session.get("role") == "direccion" %}
+
+
+    <button
+        class="btn btn-primary"
+        data-modal-open="createMenuModal"
+    >
+
+        <i data-lucide="plus"></i>
+
+        Agregar menú
+
+    </button>
+
+
+    {% endif %}
+
+
+</section>
+
+
+
+<section class="menu-information-banner">
+
+
+    <div class="menu-banner-icon">
+
+        <i data-lucide="salad"></i>
+
+    </div>
+
+
+    <div>
+
+        <strong>
+            Alimentación semanal
+        </strong>
+
+        <span>
+
+            Revisa las comidas programadas
+            antes de comenzar tu jornada.
+
+        </span>
+
+    </div>
+
+
+</section>
+
+
+
+<section class="weekly-menu-grid">
+
+
+{% for item in menus %}
+
+
+<article class="menu-day-card">
+
+
+    <div class="menu-day-header">
+
+
+        <div>
+
+            <span class="eyebrow">
+
+                Día escolar
+
+            </span>
+
+            <h2>
+
+                {{ item.menu_date }}
+
+            </h2>
+
+        </div>
+
+
+        <div class="menu-calendar-icon">
+
+            <i data-lucide="calendar-days"></i>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="meal-item">
+
+
+        <div class="meal-icon breakfast">
+
+            <i data-lucide="coffee"></i>
+
+        </div>
+
+
+        <div>
+
+            <span>
+                Desayuno
+            </span>
+
+            <strong>
+
+                {{ item.breakfast }}
+
+            </strong>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="meal-item">
+
+
+        <div class="meal-icon lunch">
+
+            <i data-lucide="utensils"></i>
+
+        </div>
+
+
+        <div>
+
+            <span>
+                Almuerzo
+            </span>
+
+            <strong>
+
+                {{ item.lunch }}
+
+            </strong>
+
+        </div>
+
+
+    </div>
+
+
+
+    {% if item.notes %}
+
+
+    <div class="menu-note">
+
+        <i data-lucide="info"></i>
+
+        {{ item.notes }}
+
+    </div>
+
+
+    {% endif %}
+
+
+</article>
+
+
+{% else %}
+
+
+<div class="empty-state">
+
+    <i data-lucide="utensils"></i>
+
+    <h3>
+        Menú no disponible
+    </h3>
+
+    <p>
+
+        Dirección todavía no ha publicado
+        el menú de esta semana.
+
+    </p>
+
+</div>
+
+
+{% endfor %}
+
+
+</section>
+
+
+
+{% if session.get("role") == "direccion" %}
+
+
+<div
+    class="modal"
+    id="createMenuModal"
+>
+
+
+    <div class="modal-panel">
+
+
+        <button
+            type="button"
+            class="modal-close"
+            data-modal-close
+        >
+
+            <i data-lucide="x"></i>
+
+        </button>
+
+
+
+        <div class="modal-header">
+
+
+            <div class="modal-icon yellow">
+
+                <i data-lucide="utensils"></i>
+
+            </div>
+
+
+            <div>
+
+                <span class="eyebrow">
+
+                    Alimentación
+
+                </span>
+
+                <h2>
+
+                    Agregar menú
+
+                </h2>
+
+            </div>
+
+
+        </div>
+
+
+
+        <form
+            method="POST"
+            action="{{ url_for('create_menu') }}"
+            class="modal-form"
+        >
+
+
+            <label class="form-label">
+
+                Fecha
+
+                <input
+                    type="date"
+                    name="menu_date"
+                    required
+                >
+
+            </label>
+
+
+
+            <label class="form-label">
+
+                Desayuno
+
+                <input
+                    type="text"
+                    name="breakfast"
+                    placeholder="Ej: Pan con queso + leche"
+                    required
+                >
+
+            </label>
+
+
+
+            <label class="form-label">
+
+                Almuerzo
+
+                <input
+                    type="text"
+                    name="lunch"
+                    placeholder="Ej: Arroz con pollo y ensalada"
+                    required
+                >
+
+            </label>
+
+
+
+            <label class="form-label">
+
+                Observaciones
+
+                <textarea
+                    name="notes"
+                    rows="3"
+                    placeholder="Ej: Incluye fruta"
+                ></textarea>
+
+            </label>
+
+
+
+            <button
+                type="submit"
+                class="btn btn-primary btn-block"
+            >
+
+                <i data-lucide="save"></i>
+
+                Guardar menú
+
+            </button>
+
+
+        </form>
+
+
+    </div>
+
+
+</div>
+
+
+{% endif %}
+
+
+{% endblock %}

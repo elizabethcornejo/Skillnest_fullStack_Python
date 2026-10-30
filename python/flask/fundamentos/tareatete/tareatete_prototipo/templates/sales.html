@@ -1,0 +1,577 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+
+Ventas · SchoolNest
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="page-heading page-heading-actions">
+
+
+    <div>
+
+        <span class="eyebrow">
+
+            Comunidad
+
+        </span>
+
+        <h1>
+
+            Ventas de cursos
+
+        </h1>
+
+        <p>
+
+            Descubre y apoya las iniciativas
+            organizadas por los estudiantes.
+
+        </p>
+
+    </div>
+
+
+    {% if session.get("role") in ["direccion", "profesor", "estudiante"] %}
+
+
+    <button
+        class="btn btn-primary"
+        data-modal-open="createSaleModal"
+    >
+
+        <i data-lucide="plus"></i>
+
+        Publicar venta
+
+    </button>
+
+
+    {% endif %}
+
+
+</section>
+
+
+
+<section class="page-toolbar">
+
+
+    <div class="search-box">
+
+        <i data-lucide="search"></i>
+
+        <input
+            type="search"
+            id="saleSearch"
+            placeholder="Buscar producto o curso..."
+        >
+
+    </div>
+
+
+
+    {% if session.get("role") in ["direccion", "profesor"] %}
+
+
+    <div class="filter-tabs small">
+
+
+        <button
+            class="filter-tab active"
+            data-sale-status="all"
+        >
+
+            Todas
+
+        </button>
+
+
+        <button
+            class="filter-tab"
+            data-sale-status="aprobada"
+        >
+
+            Aprobadas
+
+        </button>
+
+
+        <button
+            class="filter-tab"
+            data-sale-status="pendiente"
+        >
+
+            Pendientes
+
+        </button>
+
+
+    </div>
+
+
+    {% endif %}
+
+
+</section>
+
+
+
+<section class="sales-grid">
+
+
+{% for sale in sales %}
+
+
+<article
+    class="sale-card"
+    data-sale-card
+    data-status="{{ sale.status }}"
+    data-search="{{ sale.product }} {{ sale.course }} {{ sale.description }}"
+>
+
+
+    <div class="sale-image-placeholder">
+
+        <div class="sale-image-icon">
+
+            <i data-lucide="shopping-bag"></i>
+
+        </div>
+
+
+        <span class="sale-course">
+
+            {{ sale.course }}
+
+        </span>
+
+
+
+        {% if session.get("role") in ["direccion", "profesor"] %}
+
+
+        <span
+            class="
+                sale-status
+                {% if sale.status == 'aprobada' %}
+                    approved
+                {% else %}
+                    pending
+                {% endif %}
+            "
+        >
+
+            {% if sale.status == "aprobada" %}
+
+            <i data-lucide="circle-check"></i>
+
+            Aprobada
+
+            {% else %}
+
+            <i data-lucide="clock"></i>
+
+            Pendiente
+
+            {% endif %}
+
+        </span>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+
+    <div class="sale-card-content">
+
+
+        <div class="sale-title-row">
+
+
+            <div>
+
+                <span class="eyebrow">
+                    Venta de curso
+                </span>
+
+                <h2>
+
+                    {{ sale.product }}
+
+                </h2>
+
+            </div>
+
+
+            <strong class="sale-price">
+
+                ${{ "{:,}".format(sale.price).replace(",", ".") }}
+
+            </strong>
+
+
+        </div>
+
+
+
+        <p>
+
+            {{ sale.description or "Sin descripción." }}
+
+        </p>
+
+
+
+        <div class="sale-information">
+
+
+            <span>
+
+                <i data-lucide="calendar"></i>
+
+                {{ sale.sale_date }}
+
+            </span>
+
+
+            <span>
+
+                <i data-lucide="message-circle"></i>
+
+                {{ sale.contact or "Directiva del curso" }}
+
+            </span>
+
+
+        </div>
+
+
+
+        {% if session.get("role") in ["direccion", "profesor"] %}
+
+
+        <div class="sale-admin-actions">
+
+
+            {% if sale.status != "aprobada" %}
+
+
+            <form
+                method="POST"
+                action="{{ url_for('approve_sale', sale_id=sale.id) }}"
+            >
+
+                <button
+                    type="submit"
+                    class="btn btn-success btn-small"
+                >
+
+                    <i data-lucide="check"></i>
+
+                    Aprobar
+
+                </button>
+
+            </form>
+
+
+            {% endif %}
+
+
+
+            <form
+                method="POST"
+                action="{{ url_for('delete_sale', sale_id=sale.id) }}"
+                data-confirm="¿Seguro que quieres eliminar esta venta?"
+            >
+
+                <button
+                    type="submit"
+                    class="btn btn-danger-soft btn-small"
+                >
+
+                    <i data-lucide="trash-2"></i>
+
+                    Eliminar
+
+                </button>
+
+            </form>
+
+
+        </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+</article>
+
+
+{% else %}
+
+
+<div class="empty-state">
+
+    <i data-lucide="store"></i>
+
+    <h3>
+
+        No hay ventas disponibles
+
+    </h3>
+
+    <p>
+
+        Cuando un curso publique una venta,
+        aparecerá aquí.
+
+    </p>
+
+</div>
+
+
+{% endfor %}
+
+
+<div
+    class="empty-state hidden"
+    id="saleFilterEmpty"
+>
+
+    <i data-lucide="search-x"></i>
+
+    <h3>
+        No encontramos ventas
+    </h3>
+
+    <p>
+        Prueba con otra búsqueda.
+    </p>
+
+</div>
+
+
+</section>
+
+
+
+{% if session.get("role") in ["direccion", "profesor", "estudiante"] %}
+
+
+<div
+    class="modal"
+    id="createSaleModal"
+>
+
+
+    <div class="modal-panel">
+
+
+        <button
+            type="button"
+            class="modal-close"
+            data-modal-close
+        >
+
+            <i data-lucide="x"></i>
+
+        </button>
+
+
+
+        <div class="modal-header">
+
+
+            <div class="modal-icon green">
+
+                <i data-lucide="store"></i>
+
+            </div>
+
+
+            <div>
+
+                <span class="eyebrow">
+
+                    Comunidad
+
+                </span>
+
+                <h2>
+
+                    Publicar venta
+
+                </h2>
+
+            </div>
+
+
+        </div>
+
+
+
+        {% if session.get("role") == "estudiante" %}
+
+
+        <div class="modal-notice">
+
+            <i data-lucide="info"></i>
+
+            <span>
+
+                Tu publicación deberá ser aprobada
+                por un profesor o Dirección.
+
+            </span>
+
+        </div>
+
+
+        {% endif %}
+
+
+
+        <form
+            method="POST"
+            action="{{ url_for('create_sale') }}"
+            class="modal-form"
+        >
+
+
+            <div class="form-two-columns">
+
+
+                <label class="form-label">
+
+                    Curso
+
+                    <input
+                        type="text"
+                        name="course"
+                        value="{{ session.get('course', '') }}"
+                        placeholder="Ej: 4° Medio A"
+                        required
+                    >
+
+                </label>
+
+
+                <label class="form-label">
+
+                    Producto
+
+                    <input
+                        type="text"
+                        name="product"
+                        placeholder="Ej: Brownies"
+                        required
+                    >
+
+                </label>
+
+
+                <label class="form-label">
+
+                    Fecha
+
+                    <input
+                        type="date"
+                        name="sale_date"
+                        required
+                    >
+
+                </label>
+
+
+                <label class="form-label">
+
+                    Precio
+
+                    <div class="price-input">
+
+                        <span>$</span>
+
+                        <input
+                            type="number"
+                            name="price"
+                            min="0"
+                            placeholder="1500"
+                            required
+                        >
+
+                    </div>
+
+                </label>
+
+
+            </div>
+
+
+
+            <label class="form-label">
+
+                Contacto
+
+                <input
+                    type="text"
+                    name="contact"
+                    placeholder="Ej: Instagram o directiva del curso"
+                >
+
+            </label>
+
+
+
+            <label class="form-label">
+
+                Descripción
+
+                <textarea
+                    name="description"
+                    rows="4"
+                    placeholder="Cuenta brevemente qué están vendiendo..."
+                ></textarea>
+
+            </label>
+
+
+
+            <button
+                type="submit"
+                class="btn btn-primary btn-block"
+            >
+
+                <i data-lucide="send"></i>
+
+                Enviar publicación
+
+            </button>
+
+
+        </form>
+
+
+    </div>
+
+
+</div>
+
+
+{% endif %}
+
+
+{% endblock %}

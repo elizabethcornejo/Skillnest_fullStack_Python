@@ -1,0 +1,629 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+
+Inicio · SchoolNest
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="dashboard-hero">
+
+
+    <div>
+
+
+        <span class="eyebrow hero-eyebrow">
+
+            Resumen de hoy
+
+        </span>
+
+
+        <h1>
+
+            Hola,
+            {{ session.get("name").split()[0] }}
+
+            <span class="wave">
+                👋
+            </span>
+
+        </h1>
+
+
+        <p>
+
+            Revisa rápidamente lo que está pasando
+            en tu comunidad educativa.
+
+        </p>
+
+
+    </div>
+
+
+
+    <a
+        href="{{ url_for('calendar_view') }}"
+        class="btn dashboard-calendar-button"
+    >
+
+        <i data-lucide="calendar-days"></i>
+
+        Ver calendario
+
+    </a>
+
+
+</section>
+
+
+
+<section class="stats-grid">
+
+
+    <article class="stat-card">
+
+        <div class="stat-icon blue">
+
+            <i data-lucide="megaphone"></i>
+
+        </div>
+
+
+        <div class="stat-copy">
+
+            <span>
+                Próximos eventos
+            </span>
+
+            <strong>
+                {{ stats.events }}
+            </strong>
+
+        </div>
+
+
+        <div class="stat-trend">
+
+            <i data-lucide="calendar-clock"></i>
+
+        </div>
+
+    </article>
+
+
+
+    <article class="stat-card">
+
+        <div class="stat-icon green">
+
+            <i data-lucide="store"></i>
+
+        </div>
+
+
+        <div class="stat-copy">
+
+            <span>
+                Ventas activas
+            </span>
+
+            <strong>
+                {{ stats.sales }}
+            </strong>
+
+        </div>
+
+
+        <div class="stat-trend">
+
+            <i data-lucide="shopping-bag"></i>
+
+        </div>
+
+    </article>
+
+
+
+    <article class="stat-card">
+
+        <div class="stat-icon yellow">
+
+            <i data-lucide="utensils"></i>
+
+        </div>
+
+
+        <div class="stat-copy">
+
+            <span>
+                Menús publicados
+            </span>
+
+            <strong>
+                {{ stats.menus }}
+            </strong>
+
+        </div>
+
+
+        <div class="stat-trend">
+
+            <i data-lucide="salad"></i>
+
+        </div>
+
+    </article>
+
+
+</section>
+
+
+
+<section class="dashboard-main-grid">
+
+
+    <article class="main-highlight-card">
+
+
+        <div class="highlight-top">
+
+
+            <div class="highlight-icon">
+
+                <i data-lucide="megaphone"></i>
+
+            </div>
+
+
+            <span class="eyebrow">
+
+                Próximo evento
+
+            </span>
+
+
+        </div>
+
+
+
+        {% if next_event %}
+
+
+        <div class="highlight-content">
+
+
+            <h2>
+
+                {{ next_event.title }}
+
+            </h2>
+
+
+            <p>
+
+                {{ next_event.description or "Sin descripción." }}
+
+            </p>
+
+
+
+            <div class="highlight-meta">
+
+
+                <div>
+
+                    <i data-lucide="calendar"></i>
+
+                    <span>
+                        {{ next_event.event_date }}
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <i data-lucide="map-pin"></i>
+
+                    <span>
+
+                        {{ next_event.location or "Lugar por confirmar" }}
+
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <i data-lucide="users"></i>
+
+                    <span>
+
+                        {{ next_event.audience or "Todo el colegio" }}
+
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <a
+                href="{{ url_for('events') }}"
+                class="inline-link"
+            >
+
+                Ver todos los eventos
+
+                <i data-lucide="arrow-right"></i>
+
+            </a>
+
+
+        </div>
+
+
+        {% else %}
+
+
+        <div class="empty-state compact">
+
+            <i data-lucide="calendar-x"></i>
+
+            <h3>
+                No hay eventos próximos
+            </h3>
+
+            <p>
+
+                Los próximos eventos aparecerán aquí.
+
+            </p>
+
+        </div>
+
+
+        {% endif %}
+
+
+    </article>
+
+
+
+    <div class="dashboard-side-cards">
+
+
+        <article class="mini-information-card">
+
+
+            <div class="mini-card-header">
+
+
+                <div class="mini-icon yellow">
+
+                    <i data-lucide="utensils"></i>
+
+                </div>
+
+
+                <span class="eyebrow">
+
+                    Menú de hoy
+
+                </span>
+
+
+            </div>
+
+
+
+            {% if today_menu %}
+
+
+            <h3>
+
+                {{ today_menu.lunch }}
+
+            </h3>
+
+
+            <p>
+
+                Desayuno:
+                {{ today_menu.breakfast }}
+
+            </p>
+
+
+            {% if today_menu.notes %}
+
+            <span class="information-note">
+
+                {{ today_menu.notes }}
+
+            </span>
+
+            {% endif %}
+
+
+            {% else %}
+
+
+            <h3>
+                Menú no publicado
+            </h3>
+
+            <p>
+
+                Dirección todavía no ha agregado
+                el menú de hoy.
+
+            </p>
+
+
+            {% endif %}
+
+
+
+            <a
+                href="{{ url_for('menu') }}"
+                class="inline-link"
+            >
+
+                Ver menú semanal
+
+                <i data-lucide="arrow-right"></i>
+
+            </a>
+
+
+        </article>
+
+
+
+        <article class="mini-information-card">
+
+
+            <div class="mini-card-header">
+
+
+                <div class="mini-icon green">
+
+                    <i data-lucide="store"></i>
+
+                </div>
+
+
+                <span class="eyebrow">
+
+                    Próxima venta
+
+                </span>
+
+
+            </div>
+
+
+
+            {% if next_sale %}
+
+
+            <div class="sale-dashboard-row">
+
+
+                <div>
+
+                    <h3>
+
+                        {{ next_sale.product }}
+
+                    </h3>
+
+                    <p>
+
+                        {{ next_sale.course }}
+
+                    </p>
+
+                </div>
+
+
+                <strong>
+
+                    ${{ "{:,}".format(next_sale.price).replace(",", ".") }}
+
+                </strong>
+
+
+            </div>
+
+
+            <span class="information-note">
+
+                {{ next_sale.sale_date }}
+
+            </span>
+
+
+            {% else %}
+
+
+            <h3>
+                Sin ventas próximas
+            </h3>
+
+            <p>
+
+                Las ventas aprobadas aparecerán aquí.
+
+            </p>
+
+
+            {% endif %}
+
+
+
+            <a
+                href="{{ url_for('sales') }}"
+                class="inline-link"
+            >
+
+                Explorar ventas
+
+                <i data-lucide="arrow-right"></i>
+
+            </a>
+
+
+        </article>
+
+
+    </div>
+
+
+</section>
+
+
+
+<section class="content-card">
+
+
+    <div class="content-card-header">
+
+
+        <div>
+
+            <span class="eyebrow">
+
+                Agenda
+
+            </span>
+
+            <h2>
+
+                Próximas actividades
+
+            </h2>
+
+        </div>
+
+
+        <a
+            href="{{ url_for('events') }}"
+            class="text-link"
+        >
+
+            Ver todo
+
+        </a>
+
+
+    </div>
+
+
+
+    <div class="agenda-list">
+
+
+        {% for event in upcoming_events %}
+
+
+        <div class="agenda-item">
+
+
+            <div class="agenda-date">
+
+                <strong>
+
+                    {{ event.event_date[8:10] }}
+
+                </strong>
+
+                <span>
+
+                    {{ event.event_date[5:7] }}
+
+                </span>
+
+            </div>
+
+
+
+            <div class="agenda-info">
+
+                <strong>
+
+                    {{ event.title }}
+
+                </strong>
+
+                <span>
+
+                    <i data-lucide="map-pin"></i>
+
+                    {{ event.location or "Lugar por confirmar" }}
+
+                </span>
+
+            </div>
+
+
+
+            <span class="category-badge">
+
+                {{ event.event_type|capitalize }}
+
+            </span>
+
+
+
+            <i
+                class="agenda-chevron"
+                data-lucide="chevron-right">
+            </i>
+
+
+        </div>
+
+
+        {% else %}
+
+
+        <div class="empty-state">
+
+            <i data-lucide="calendar-x"></i>
+
+            <h3>
+
+                Sin actividades próximas
+
+            </h3>
+
+            <p>
+
+                Las nuevas actividades aparecerán aquí.
+
+            </p>
+
+        </div>
+
+
+        {% endfor %}
+
+
+    </div>
+
+
+</section>
+
+
+{% endblock %}

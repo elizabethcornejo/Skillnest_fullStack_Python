@@ -1,0 +1,428 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+
+SchoolNest · Comunidad educativa
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="landing-hero">
+
+
+    <div class="landing-copy">
+
+
+        <div class="hero-label">
+
+            <i data-lucide="sparkles"></i>
+
+            Una comunidad más conectada
+
+        </div>
+
+
+        <h1>
+
+            Todo lo importante de tu colegio,
+
+            <span>
+                en un solo lugar.
+            </span>
+
+        </h1>
+
+
+        <p class="hero-description">
+
+            SchoolNest conecta estudiantes,
+            profesores, apoderados y dirección
+            mediante un espacio simple para consultar
+            eventos, ventas de cursos y alimentación escolar.
+
+        </p>
+
+
+        <div class="hero-actions">
+
+            <a
+                href="{{ url_for('register') }}"
+                class="btn btn-primary btn-large"
+            >
+
+                Comenzar ahora
+
+                <i data-lucide="arrow-right"></i>
+
+            </a>
+
+
+            <a
+                href="{{ url_for('login') }}"
+                class="btn btn-soft btn-large"
+            >
+
+                Ya tengo una cuenta
+
+            </a>
+
+        </div>
+
+
+
+        <div class="community-list">
+
+
+            <div>
+
+                <i data-lucide="graduation-cap"></i>
+
+                Estudiantes
+
+            </div>
+
+
+            <div>
+
+                <i data-lucide="presentation"></i>
+
+                Profesores
+
+            </div>
+
+
+            <div>
+
+                <i data-lucide="users"></i>
+
+                Apoderados
+
+            </div>
+
+
+            <div>
+
+                <i data-lucide="school"></i>
+
+                Dirección
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="landing-preview">
+
+
+        <div class="preview-window">
+
+
+            <div class="preview-topbar">
+
+                <div class="preview-logo">
+
+                    <i data-lucide="graduation-cap"></i>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        SchoolNest
+                    </strong>
+
+                    <span>
+                        Inicio
+                    </span>
+
+                </div>
+
+
+                <div class="preview-avatar">
+                    G
+                </div>
+
+            </div>
+
+
+
+            <div class="preview-body">
+
+
+                <div class="preview-welcome">
+
+                    <small>
+                        RESUMEN DE HOY
+                    </small>
+
+                    <strong>
+                        Hola, Gustavo 👋
+                    </strong>
+
+                    <span>
+                        Esto está pasando en tu colegio.
+                    </span>
+
+                </div>
+
+
+
+                <div class="preview-grid">
+
+
+                    <div class="preview-card preview-blue">
+
+                        <i data-lucide="megaphone"></i>
+
+                        <span>
+                            Próximo evento
+                        </span>
+
+                        <strong>
+                            Feria de especialidades
+                        </strong>
+
+                        <small>
+                            08 OCT · Gimnasio
+                        </small>
+
+                    </div>
+
+
+
+                    <div class="preview-card preview-yellow">
+
+                        <i data-lucide="utensils"></i>
+
+                        <span>
+                            Menú
+                        </span>
+
+                        <strong>
+                            Arroz con pollo
+                        </strong>
+
+                        <small>
+                            + ensalada y fruta
+                        </small>
+
+                    </div>
+
+
+
+                    <div class="preview-card preview-green">
+
+                        <i data-lucide="store"></i>
+
+                        <span>
+                            Venta
+                        </span>
+
+                        <strong>
+                            Brownies 4°A
+                        </strong>
+
+                        <small>
+                            $1.500
+                        </small>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <div class="floating-status status-one">
+
+            <div class="status-icon green">
+
+                <i data-lucide="check"></i>
+
+            </div>
+
+            <div>
+
+                <strong>
+                    Información actualizada
+                </strong>
+
+                <span>
+                    hace 2 minutos
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="floating-status status-two">
+
+            <div class="status-icon blue">
+
+                <i data-lucide="calendar"></i>
+
+            </div>
+
+            <div>
+
+                <strong>
+                    Próximo evento
+                </strong>
+
+                <span>
+                    Feria de especialidades
+                </span>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<section class="landing-features">
+
+
+    <div class="section-heading centered">
+
+        <span class="eyebrow">
+            Una plataforma
+        </span>
+
+        <h2>
+            Diseñada para el día a día escolar
+        </h2>
+
+        <p>
+
+            La información que realmente necesita
+            la comunidad educativa, sin complicaciones.
+
+        </p>
+
+    </div>
+
+
+
+    <div class="feature-grid">
+
+
+        <article class="feature-item">
+
+            <div class="feature-icon blue">
+
+                <i data-lucide="calendar-days"></i>
+
+            </div>
+
+            <h3>
+                Calendario integrado
+            </h3>
+
+            <p>
+
+                Eventos, actividades y fechas importantes
+                reunidas en una misma agenda.
+
+            </p>
+
+        </article>
+
+
+
+        <article class="feature-item">
+
+            <div class="feature-icon violet">
+
+                <i data-lucide="megaphone"></i>
+
+            </div>
+
+            <h3>
+                Eventos escolares
+            </h3>
+
+            <p>
+
+                Consulta reuniones, actos,
+                actividades académicas y celebraciones.
+
+            </p>
+
+        </article>
+
+
+
+        <article class="feature-item">
+
+            <div class="feature-icon green">
+
+                <i data-lucide="store"></i>
+
+            </div>
+
+            <h3>
+                Ventas de cursos
+            </h3>
+
+            <p>
+
+                Publica y descubre iniciativas
+                para apoyar las actividades estudiantiles.
+
+            </p>
+
+        </article>
+
+
+
+        <article class="feature-item">
+
+            <div class="feature-icon yellow">
+
+                <i data-lucide="utensils"></i>
+
+            </div>
+
+            <h3>
+                Alimentación
+            </h3>
+
+            <p>
+
+                Revisa desayuno y almuerzo
+                antes de comenzar la jornada.
+
+            </p>
+
+        </article>
+
+
+    </div>
+
+
+</section>
+
+
+{% endblock %}

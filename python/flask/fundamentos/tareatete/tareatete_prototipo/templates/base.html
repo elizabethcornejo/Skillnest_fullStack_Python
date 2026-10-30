@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {% block title %}
+        SchoolNest
+        {% endblock %}
+    </title>
+
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <script
+        src="https://unpkg.com/lucide@latest">
+    </script>
+
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+
+    {% block head %}
+    {% endblock %}
+
+</head>
+
+
+<body>
+
+
+<header class="navbar">
+
+    <div class="nav-container">
+
+
+        <a
+            class="brand"
+            href="
+            {% if session.get('user_id') %}
+                {{ url_for('dashboard') }}
+            {% else %}
+                {{ url_for('index') }}
+            {% endif %}
+            "
+        >
+
+            <div class="brand-logo">
+
+                <i data-lucide="graduation-cap"></i>
+
+            </div>
+
+
+            <div class="brand-copy">
+
+                <strong>
+                    SchoolNest
+                </strong>
+
+                <span>
+                    Comunidad educativa
+                </span>
+
+            </div>
+
+        </a>
+
+
+
+        {% if session.get("user_id") %}
+
+
+        <nav
+            class="nav-links"
+            id="navLinks"
+        >
+
+            <a
+                href="{{ url_for('dashboard') }}"
+                class="
+                    nav-link
+                    {% if request.endpoint == 'dashboard' %}
+                    active
+                    {% endif %}
+                "
+            >
+
+                <i data-lucide="house"></i>
+
+                <span>
+                    Inicio
+                </span>
+
+            </a>
+
+
+            <a
+                href="{{ url_for('calendar_view') }}"
+                class="
+                    nav-link
+                    {% if request.endpoint == 'calendar_view' %}
+                    active
+                    {% endif %}
+                "
+            >
+
+                <i data-lucide="calendar-days"></i>
+
+                <span>
+                    Calendario
+                </span>
+
+            </a>
+
+
+            <a
+                href="{{ url_for('events') }}"
+                class="
+                    nav-link
+                    {% if request.endpoint == 'events' %}
+                    active
+                    {% endif %}
+                "
+            >
+
+                <i data-lucide="megaphone"></i>
+
+                <span>
+                    Eventos
+                </span>
+
+            </a>
+
+
+            <a
+                href="{{ url_for('sales') }}"
+                class="
+                    nav-link
+                    {% if request.endpoint == 'sales' %}
+                    active
+                    {% endif %}
+                "
+            >
+
+                <i data-lucide="store"></i>
+
+                <span>
+                    Ventas
+                </span>
+
+            </a>
+
+
+            <a
+                href="{{ url_for('menu') }}"
+                class="
+                    nav-link
+                    {% if request.endpoint == 'menu' %}
+                    active
+                    {% endif %}
+                "
+            >
+
+                <i data-lucide="utensils"></i>
+
+                <span>
+                    Menú
+                </span>
+
+            </a>
+
+        </nav>
+
+
+
+        <div class="navbar-right">
+
+
+            <button
+                class="notification-button"
+                type="button"
+                title="Notificaciones"
+            >
+
+                <i data-lucide="bell"></i>
+
+                <span class="notification-dot"></span>
+
+            </button>
+
+
+
+            <div class="profile-wrapper">
+
+
+                <button
+                    class="profile-button"
+                    type="button"
+                    data-profile-toggle
+                >
+
+                    <div class="avatar">
+
+                        {{ session.get("name", "U")[0]|upper }}
+
+                    </div>
+
+
+                    <div class="profile-copy">
+
+                        <strong>
+
+                            {{ session.get("name") }}
+
+                        </strong>
+
+                        <span>
+
+                            {{ session.get("role")|capitalize }}
+
+                            {% if session.get("course") %}
+
+                            · {{ session.get("course") }}
+
+                            {% endif %}
+
+                        </span>
+
+                    </div>
+
+
+                    <i
+                        class="profile-chevron"
+                        data-lucide="chevron-down">
+                    </i>
+
+                </button>
+
+
+
+                <div
+                    class="profile-dropdown"
+                    data-profile-menu
+                >
+
+                    <div class="profile-dropdown-header">
+
+                        <strong>
+
+                            {{ session.get("name") }}
+
+                        </strong>
+
+                        <span>
+
+                            {{ session.get("role")|capitalize }}
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="dropdown-divider"></div>
+
+
+                    <a
+                        href="{{ url_for('logout') }}"
+                        class="dropdown-danger"
+                    >
+
+                        <i data-lucide="log-out"></i>
+
+                        Cerrar sesión
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <button
+                class="mobile-menu-button"
+                type="button"
+                id="navToggle"
+            >
+
+                <i data-lucide="menu"></i>
+
+            </button>
+
+
+        </div>
+
+
+        {% else %}
+
+
+        <div class="public-actions">
+
+            <a
+                href="{{ url_for('login') }}"
+                class="btn btn-ghost"
+            >
+
+                Iniciar sesión
+
+            </a>
+
+
+            <a
+                href="{{ url_for('register') }}"
+                class="btn btn-primary"
+            >
+
+                Crear cuenta
+
+            </a>
+
+        </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+</header>
+
+
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+
+{% if messages %}
+
+<div class="toast-stack">
+
+    {% for category, message in messages %}
+
+    <div
+        class="
+            toast
+            toast-{{ category }}
+        "
+    >
+
+        <div class="toast-icon">
+
+            {% if category == "success" %}
+
+            <i data-lucide="check-circle"></i>
+
+            {% elif category == "danger" %}
+
+            <i data-lucide="circle-alert"></i>
+
+            {% elif category == "warning" %}
+
+            <i data-lucide="triangle-alert"></i>
+
+            {% else %}
+
+            <i data-lucide="info"></i>
+
+            {% endif %}
+
+        </div>
+
+
+        <span>
+
+            {{ message }}
+
+        </span>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endif %}
+
+{% endwith %}
+
+
+
+<main class="page-shell">
+
+    {% block content %}
+    {% endblock %}
+
+</main>
+
+
+
+<footer class="footer">
+
+    <div class="footer-brand">
+
+        <div class="footer-logo">
+
+            <i data-lucide="graduation-cap"></i>
+
+        </div>
+
+        <strong>
+
+            SchoolNest
+
+        </strong>
+
+    </div>
+
+
+    <p>
+
+        Conectando estudiantes, familias,
+        profesores y comunidad educativa.
+
+    </p>
+
+
+    <span>
+
+        © {{ current_year }} SchoolNest
+
+    </span>
+
+</footer>
+
+
+
+<script
+    src="{{ url_for('static', filename='js/main.js') }}">
+</script>
+
+
+<script>
+
+    lucide.createIcons();
+
+</script>
+
+
+{% block scripts %}
+{% endblock %}
+
+
+</body>
+
+</html>

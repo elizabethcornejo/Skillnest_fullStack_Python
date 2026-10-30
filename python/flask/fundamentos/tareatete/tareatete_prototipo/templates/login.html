@@ -1,0 +1,224 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+
+Iniciar sesión · SchoolNest
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="auth-layout">
+
+
+    <div class="auth-presentation">
+
+
+        <div class="auth-decoration decoration-one"></div>
+
+        <div class="auth-decoration decoration-two"></div>
+
+
+        <div class="auth-presentation-content">
+
+
+            <span class="eyebrow light">
+
+                Bienvenido de vuelta
+
+            </span>
+
+
+            <h1>
+
+                Tu comunidad escolar,
+                siempre contigo.
+
+            </h1>
+
+
+            <p>
+
+                Accede rápidamente a eventos,
+                actividades, ventas y alimentación escolar.
+
+            </p>
+
+
+
+            <div class="auth-benefits">
+
+
+                <div>
+
+                    <i data-lucide="calendar-check"></i>
+
+                    Información actualizada
+
+                </div>
+
+
+                <div>
+
+                    <i data-lucide="users"></i>
+
+                    Una plataforma para todos
+
+                </div>
+
+
+                <div>
+
+                    <i data-lucide="smartphone"></i>
+
+                    Disponible desde cualquier dispositivo
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="auth-form-column">
+
+
+        <form
+            method="POST"
+            class="auth-card"
+        >
+
+
+            <div class="auth-card-header">
+
+
+                <div class="auth-logo">
+
+                    <i data-lucide="graduation-cap"></i>
+
+                </div>
+
+
+                <h2>
+                    Iniciar sesión
+                </h2>
+
+
+                <p>
+
+                    Ingresa tus datos para acceder a SchoolNest.
+
+                </p>
+
+
+            </div>
+
+
+
+            <label class="form-label">
+
+                Correo electrónico
+
+                <div class="input-wrapper">
+
+                    <i data-lucide="mail"></i>
+
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="nombre@correo.cl"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+            </label>
+
+
+
+            <label class="form-label">
+
+                Contraseña
+
+                <div class="input-wrapper">
+
+                    <i data-lucide="lock"></i>
+
+                    <input
+                        type="password"
+                        name="password"
+                        id="loginPassword"
+                        placeholder="Tu contraseña"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        data-password-toggle="loginPassword"
+                    >
+
+                        <i data-lucide="eye"></i>
+
+                    </button>
+
+                </div>
+
+            </label>
+
+
+
+            <button
+                type="submit"
+                class="btn btn-primary btn-block btn-auth"
+            >
+
+                Ingresar
+
+                <i data-lucide="arrow-right"></i>
+
+            </button>
+
+
+
+            <div class="auth-divider">
+
+                <span>
+                    ¿Primera vez aquí?
+                </span>
+
+            </div>
+
+
+
+            <a
+                href="{{ url_for('register') }}"
+                class="btn btn-soft btn-block"
+            >
+
+                Crear una cuenta
+
+            </a>
+
+
+        </form>
+
+
+    </div>
+
+
+</section>
+
+
+{% endblock %}

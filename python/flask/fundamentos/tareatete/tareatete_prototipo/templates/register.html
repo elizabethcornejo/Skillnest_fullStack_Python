@@ -1,0 +1,326 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+
+Crear cuenta · SchoolNest
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="auth-layout">
+
+
+    <div class="auth-presentation register-presentation">
+
+
+        <div class="auth-decoration decoration-one"></div>
+
+        <div class="auth-decoration decoration-two"></div>
+
+
+        <div class="auth-presentation-content">
+
+
+            <span class="eyebrow light">
+
+                Forma parte de SchoolNest
+
+            </span>
+
+
+            <h1>
+
+                Una plataforma para toda
+                la comunidad educativa.
+
+            </h1>
+
+
+            <p>
+
+                Crea tu cuenta y accede a toda
+                la información importante de tu colegio.
+
+            </p>
+
+
+
+            <div class="role-preview">
+
+
+                <div>
+
+                    <i data-lucide="graduation-cap"></i>
+
+                    <span>
+                        Estudiante
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <i data-lucide="presentation"></i>
+
+                    <span>
+                        Profesor
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <i data-lucide="users"></i>
+
+                    <span>
+                        Apoderado
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <i data-lucide="school"></i>
+
+                    <span>
+                        Dirección
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="auth-form-column">
+
+
+        <form
+            method="POST"
+            class="auth-card register-card"
+        >
+
+
+            <div class="auth-card-header">
+
+
+                <div class="auth-logo">
+
+                    <i data-lucide="user-plus"></i>
+
+                </div>
+
+
+                <h2>
+                    Crear cuenta
+                </h2>
+
+
+                <p>
+
+                    Completa tus datos para ingresar.
+
+                </p>
+
+
+            </div>
+
+
+
+            <label class="form-label">
+
+                Nombre completo
+
+                <div class="input-wrapper">
+
+                    <i data-lucide="user"></i>
+
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Tu nombre completo"
+                        required
+                    >
+
+                </div>
+
+            </label>
+
+
+
+            <label class="form-label">
+
+                Correo electrónico
+
+                <div class="input-wrapper">
+
+                    <i data-lucide="mail"></i>
+
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="nombre@correo.cl"
+                        required
+                    >
+
+                </div>
+
+            </label>
+
+
+
+            <div class="form-two-columns">
+
+
+                <label class="form-label">
+
+                    Tipo de usuario
+
+                    <div class="input-wrapper">
+
+                        <i data-lucide="users-round"></i>
+
+                        <select
+                            name="role"
+                            id="roleSelect"
+                            required
+                        >
+
+                            {% for role in roles %}
+
+                            <option value="{{ role }}">
+
+                                {{ role|capitalize }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+                </label>
+
+
+
+                <label class="form-label">
+
+                    Curso
+
+                    <div class="input-wrapper">
+
+                        <i data-lucide="book-open"></i>
+
+                        <input
+                            type="text"
+                            name="course"
+                            placeholder="Ej: 4° Medio A"
+                        >
+
+                    </div>
+
+                </label>
+
+
+            </div>
+
+
+
+            <label class="form-label">
+
+                Contraseña
+
+                <div class="input-wrapper">
+
+                    <i data-lucide="lock"></i>
+
+                    <input
+                        type="password"
+                        name="password"
+                        id="registerPassword"
+                        minlength="6"
+                        placeholder="Mínimo 6 caracteres"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        data-password-toggle="registerPassword"
+                    >
+
+                        <i data-lucide="eye"></i>
+
+                    </button>
+
+                </div>
+
+            </label>
+
+
+
+            <div class="security-note">
+
+                <i data-lucide="shield-check"></i>
+
+                <span>
+
+                    Tu contraseña se almacena de manera segura.
+
+                </span>
+
+            </div>
+
+
+
+            <button
+                type="submit"
+                class="btn btn-primary btn-block btn-auth"
+            >
+
+                Crear cuenta
+
+                <i data-lucide="arrow-right"></i>
+
+            </button>
+
+
+
+            <p class="auth-footer-text">
+
+                ¿Ya tienes una cuenta?
+
+                <a href="{{ url_for('login') }}">
+
+                    Inicia sesión
+
+                </a>
+
+            </p>
+
+
+        </form>
+
+
+    </div>
+
+
+</section>
+
+
+{% endblock %}
